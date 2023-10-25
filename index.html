@@ -83,13 +83,13 @@
             margin-right: 20px;
         }
 
-        #coordinates-box {
-            background-color: white;
-            padding: 3px;
-            text-align: right;
-            position: absolute;
-            top: 10px; /* Adjust the top position as needed */
-            right: 10px; /* Adjust the right position as needed */
+        #saved-coords {
+            padding: 10px;
+            font-family: Arial, sans-serif;
+        }
+
+        #saved-coords-text {
+            font-weight: bold;
         }
     </style>
 
@@ -97,7 +97,8 @@
 
 <body>
     <div id="navbar">
-        <img id="navbar-icon" src="https://media.discordapp.net/attachments/1118917959046414426/1160031461253054514/image.png"
+        <img id="navbar-icon"
+            src="https://media.discordapp.net/attachments/1118917959046414426/1160031461253054514/image.png"
             alt="Navbar Icon">
         <a href="https://realms.gg/ofptGmiKm34">Join Realm</a>
         <a href="https://discord.gg/f6Tvtcsy7w">Join Discord</a>
@@ -105,37 +106,38 @@
 
     <div id="map"></div>
 
-    <div id="coordinates-box">
-        <span>Clicked Coordinates: </span>
-        <span id="clicked-coordinates"></span>
+    <div id="saved-coords">
+        Saved Coords: <span id="saved-coords-text"></span>
     </div>
 
     <script type="text/javascript">
-document.title = UnminedMapProperties.worldName + " - " + document.title;
 
-if (UnminedCustomMarkers && UnminedCustomMarkers.isEnabled && UnminedCustomMarkers.markers) {
-    UnminedMapProperties.markers = UnminedMapProperties.markers.concat(UnminedCustomMarkers.markers);
-}
+        document.title = UnminedMapProperties.worldName + " - " + document.title;
 
-let unmined = new Unmined();
-const map = unmined.map('map', UnminedMapProperties, UnminedRegions);
+        // Define a variable to store the saved coordinates
+        let savedCoordsText = document.getElementById('saved-coords-text');
 
-// Add a click event handler to the map
-map.on('click', function (event) {
-    const clickedCoordinates = event.coordinate;
-    const coordinatesBox = document.getElementById('clicked-coordinates');
-    
-    // Extract the text from the " - " section of the DOM manipulation line
-    const domManipulationLine = UnminedMapProperties.worldName;
-    const parts = domManipulationLine.split(" - ");
-    const clickedText = parts[1] || domManipulationLine;
+        // Function to update the saved coordinates
+        function updateSavedCoords(coordinates) {
+            savedCoordsText.textContent = coordinates;
+        }
 
-    coordinatesBox.innerHTML = `(${clickedText}) - (${clickedCoordinates[0].toFixed(2)}, ${clickedCoordinates[1].toFixed(2)})`;
+        if (UnminedCustomMarkers && UnminedCustomMarkers.isEnabled && UnminedCustomMarkers.markers) {
+            UnminedMapProperties.markers = UnminedMapProperties.markers.concat(UnminedCustomMarkers.markers);
+        }
 
-    // Update the top right coordinates box with just the clicked coordinates
-    topRightCoordinatesBox.innerHTML = `(${clickedCoordinates[0].toFixed(2)}, ${clickedCoordinates[1].toFixed(2)})`;
-});
+        let unmined = new Unmined();
 
+        if (UnminedPlayers && UnminedPlayers.length > 0) {
+            UnminedMapProperties.markers = UnminedMapProperties.markers.concat(unmined.createPlayerMarkers(UnminedPlayers));
+        }
+
+        unmined.map('map', UnminedMapProperties, UnminedRegions, {
+            clickCallback: function (event) {
+                const coordinates = event.coordinate;
+                updateSavedCoords(`(${coordinates[0]}, ${coordinates[1]})`);
+            }
+        });
 
     </script>
 </body>
