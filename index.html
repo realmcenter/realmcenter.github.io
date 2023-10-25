@@ -12,12 +12,6 @@
         href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.9.0/css/ol.css"
         integrity="sha256-jckPZk66EJrEBQXnJ5QC2bD+GxWPDRVVoMGr5vrMZvM=" crossorigin="anonymous">
 
-    <div id="coordinates-box">
-    <span>Clicked Coordinates: </span>
-    <span id="clicked-coordinates"></span>
-</div>
-
-
     <!-- OpenLayers JS -->
     <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.9.0/build/ol.js"
         integrity="sha256-77dogUPZ1WVoK9BDF0CxsKnAouX3YzK6n4tIcbDgtFI=" crossorigin="anonymous"></script>
@@ -88,6 +82,15 @@
             color: white;
             margin-right: 20px;
         }
+
+        #coordinates-box {
+            background-color: white;
+            padding: 3px;
+            text-align: right;
+            position: absolute;
+            top: 10px; /* Adjust the top position as needed */
+            right: 10px; /* Adjust the right position as needed */
+        }
     </style>
 
 </head>
@@ -102,23 +105,31 @@
 
     <div id="map"></div>
 
+    <div id="coordinates-box">
+        <span>Clicked Coordinates: </span>
+        <span id="clicked-coordinates"></span>
+    </div>
+
     <script type="text/javascript">
-         document.title = UnminedMapProperties.worldName + " - " + document.title;
 
-if (UnminedCustomMarkers && UnminedCustomMarkers.isEnabled && UnminedCustomMarkers.markers) {
-    UnminedMapProperties.markers = UnminedMapProperties.markers.concat(UnminedCustomMarkers.markers);
-}
+        document.title = UnminedMapProperties.worldName + " - " + document.title;
 
-let unmined = new Unmined();
-const map = unmined.map('map', UnminedMapProperties, UnminedRegions);
+        if (UnminedCustomMarkers && UnminedCustomMarkers.isEnabled && UnminedCustomMarkers.markers) {
+            UnminedMapProperties.markers = UnminedMapProperties.markers.concat(UnminedCustomMarkers.markers);
+        }
 
-// Add a click event handler to the map
-map.on('click', function (event) {
-    const clickedCoordinates = event.coordinate;
-    const coordinatesBox = document.getElementById('clicked-coordinates');
-    coordinatesBox.innerHTML = `(${clickedCoordinates[0].toFixed(2)}, ${clickedCoordinates[1].toFixed(2)})`;
-});
+        let unmined = new Unmined();
+        const map = unmined.map('map', UnminedMapProperties, UnminedRegions);
 
+        // Add a click event handler to the map
+        map.on('click', function (event) {
+            const clickedCoordinates = event.coordinate;
+            const coordinatesBox = document.getElementById('clicked-coordinates');
+            coordinatesBox.innerHTML = `(${clickedCoordinates[0].toFixed(2)}, ${clickedCoordinates[1].toFixed(2)})`;
+
+            // Update the top right coordinates box
+            topRightCoordinatesBox.innerHTML = `(${clickedCoordinates[0].toFixed(2)}, ${clickedCoordinates[1].toFixed(2)})`;
+        });
     </script>
 </body>
 
