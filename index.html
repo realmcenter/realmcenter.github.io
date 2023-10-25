@@ -12,6 +12,12 @@
         href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.9.0/css/ol.css"
         integrity="sha256-jckPZk66EJrEBQXnJ5QC2bD+GxWPDRVVoMGr5vrMZvM=" crossorigin="anonymous">
 
+    <div id="coordinates-box">
+    <span>Clicked Coordinates: </span>
+    <span id="clicked-coordinates"></span>
+</div>
+
+
     <!-- OpenLayers JS -->
     <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.9.0/build/ol.js"
         integrity="sha256-77dogUPZ1WVoK9BDF0CxsKnAouX3YzK6n4tIcbDgtFI=" crossorigin="anonymous"></script>
@@ -99,28 +105,20 @@
     <script type="text/javascript">
          document.title = UnminedMapProperties.worldName + " - " + document.title;
 
-    if (UnminedCustomMarkers && UnminedCustomMarkers.isEnabled && UnminedCustomMarkers.markers) {
-        UnminedMapProperties.markers = UnminedMapProperties.markers.concat(UnminedCustomMarkers.markers);
-    }
+if (UnminedCustomMarkers && UnminedCustomMarkers.isEnabled && UnminedCustomMarkers.markers) {
+    UnminedMapProperties.markers = UnminedMapProperties.markers.concat(UnminedCustomMarkers.markers);
+}
 
-    let unmined = new Unmined();
+let unmined = new Unmined();
+const map = unmined.map('map', UnminedMapProperties, UnminedRegions);
 
-    if (UnminedPlayers && UnminedPlayers.length > 0) {
-        UnminedMapProperties.markers = UnminedMapProperties.markers.concat(unmined.createPlayerMarkers(UnminedPlayers));
-    }
+// Add a click event handler to the map
+map.on('click', function (event) {
+    const clickedCoordinates = event.coordinate;
+    const coordinatesBox = document.getElementById('clicked-coordinates');
+    coordinatesBox.innerHTML = `(${clickedCoordinates[0].toFixed(2)}, ${clickedCoordinates[1].toFixed(2)})`;
+});
 
-    const map = unmined.map('map', UnminedMapProperties, UnminedRegions);
-
-    // Create a click interaction
-    const clickInteraction = new ol.interaction.Click({
-        handleEvent: function (evt) {
-            const coordinates = ol.proj.toLonLat(evt.coordinate);
-            alert('Coordinates: ' + coordinates);
-        },
-    });
-
-    // Add the click interaction to the map
-    map.addInteraction(clickInteraction);
     </script>
 </body>
 
