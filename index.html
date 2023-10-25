@@ -111,25 +111,27 @@
     </div>
 
     <script type="text/javascript">
+document.title = UnminedMapProperties.worldName + " - " + document.title;
 
-        document.title = UnminedMapProperties.worldName + " - " + document.title;
+if (UnminedCustomMarkers && UnminedCustomMarkers.isEnabled && UnminedCustomMarkers.markers) {
+    UnminedMapProperties.markers = UnminedMapProperties.markers.concat(UnminedCustomMarkers.markers);
+}
 
-        if (UnminedCustomMarkers && UnminedCustomMarkers.isEnabled && UnminedCustomMarkers.markers) {
-            UnminedMapProperties.markers = UnminedMapProperties.markers.concat(UnminedCustomMarkers.markers);
-        }
+let unmined = new Unmined();
+const map = unmined.map('map', UnminedMapProperties, UnminedRegions);
 
-        let unmined = new Unmined();
-        const map = unmined.map('map', UnminedMapProperties, UnminedRegions);
+// Add a click event handler to the map
+map.on('click', function (event) {
+    const clickedCoordinates = event.coordinate;
+    const coordinatesBox = document.getElementById('clicked-coordinates');
+    const clickedTitle = document.title.split(" - ")[1].trim();
+    
+    coordinatesBox.innerHTML = `(${clickedCoordinates[0].toFixed(2)}, ${clickedCoordinates[1].toFixed(2)}) - ${clickedTitle}`;
 
-        // Add a click event handler to the map
-        map.on('click', function (event) {
-            const clickedCoordinates = event.coordinate;
-            const coordinatesBox = document.getElementById('clicked-coordinates');
-            coordinatesBox.innerHTML = `(${clickedCoordinates[0].toFixed(2)}, ${clickedCoordinates[1].toFixed(2)})`;
+    // Update the top right coordinates box
+    topRightCoordinatesBox.innerHTML = `(${clickedCoordinates[0].toFixed(2)}, ${clickedCoordinates[1].toFixed(2)}) - ${clickedTitle}`;
+});
 
-            // Update the top right coordinates box
-            topRightCoordinatesBox.innerHTML = `(${clickedCoordinates[0].toFixed(2)}, ${clickedCoordinates[1].toFixed(2)})`;
-        });
     </script>
 </body>
 
