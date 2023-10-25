@@ -15,6 +15,7 @@
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
+            position: relative;
         }
 
         #map {
@@ -29,6 +30,11 @@
             align-items: center;
             justify-content: space-between;
             padding: 10px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1; /* Overlay the map content */
         }
 
         .navbar a {
@@ -42,12 +48,17 @@
         }
 
         .navbar a.icon img {
-            width: 200px; /* Adjust the width to make the icon smaller */
+            width: 30px; /* Adjust the width to make the icon smaller */
             height: auto; /* Maintain aspect ratio */
         }
 
         .navbar a.join-link {
-            margin: 3 1px; /* Adjust the spacing between links */
+            margin: 0 5px; /* Adjust the spacing between links */
+        }
+
+        .map-container {
+            position: relative;
+            z-index: 0; /* Map content goes below the navbar */
         }
     </style>
 </head>
@@ -55,14 +66,28 @@
 <body>
     <div class="navbar">
         <a href="#" class="icon"><img src="https://media.discordapp.net/attachments/1118917959046414426/1160031461253054514/image.png" alt="Icon"></a>
-        <a href="https://realms.gg/ofptGmiKm34" class="join-link">Join Realm</a>
-        <a href="https://discord.gg/f6Tvtcsy7w" class="join-link">Join Discord</a>
+        <a href="#" class="join-link">Join Realm</a>
+        <a href="#" class="join-link">Join Discord</a>
     </div>
-    <div id="map"></div>
+    <div class="map-container">
+        <div id="map"></div>
+    </div>
 
-    <!-- Your existing JavaScript code -->
+  
     <script type="text/javascript">
-        // ...
+        document.title = UnminedMapProperties.worldName + " - " + document.title;
+
+        if (UnminedCustomMarkers && UnminedCustomMarkers.isEnabled && UnminedCustomMarkers.markers) {
+            UnminedMapProperties.markers = UnminedMapProperties.markers.concat(UnminedCustomMarkers.markers);
+        }
+        
+        let unmined = new Unmined();
+
+        if (UnminedPlayers && UnminedPlayers.length > 0) {
+            UnminedMapProperties.markers = UnminedMapProperties.markers.concat(unmined.createPlayerMarkers(UnminedPlayers));
+        }
+
+        unmined.map('map', UnminedMapProperties, UnminedRegions);
     </script>
 </body>
 
