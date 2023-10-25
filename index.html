@@ -97,9 +97,6 @@
     <div id="map"></div>
 
     <script type="text/javascript">
-        let map = null;
-        let pinFeature = null;
-
         document.title = UnminedMapProperties.worldName + " - " + document.title;
 
         if (UnminedCustomMarkers && UnminedCustomMarkers.isEnabled && UnminedCustomMarkers.markers) {
@@ -112,36 +109,12 @@
             UnminedMapProperties.markers = UnminedMapProperties.markers.concat(unmined.createPlayerMarkers(UnminedPlayers));
         }
 
-        unmined.map('map', UnminedMapProperties, UnminedRegions);
+        const map = unmined.map('map', UnminedMapProperties, UnminedRegions);
 
-        // Initialize the map click event
-        map = unmined.getMap();
+        // Add a click event listener to the map
         map.on('click', function (event) {
-            const coordinate = event.coordinate;
-
-            if (pinFeature) {
-                // Remove the previous pin feature
-                unmined.removeFeature(pinFeature);
-            }
-
-            // Create a new pin feature
-            pinFeature = new ol.Feature({
-                geometry: new ol.geom.Point(coordinate),
-            });
-
-            // Set the style of the pin feature
-            pinFeature.setStyle(new ol.style.Style({
-                image: new ol.style.Icon({
-                    src: 'https://static-00.iconduck.com/assets.00/map-marker-icon-1366x2048-7u371uwd.png',
-                }),
-            }));
-
-            // Add the pin feature to the map
-            unmined.addFeature(pinFeature);
-
-            // Display coordinates
-            const lonLat = ol.proj.toLonLat(coordinate, 'EPSG:3857');
-            alert('Clicked at coordinates: ' + lonLat);
+            const coordinates = event.coordinate;
+            alert('Coordinates: ' + coordinates);
         });
     </script>
 </body>
