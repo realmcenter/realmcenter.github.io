@@ -97,25 +97,30 @@
     <div id="map"></div>
 
     <script type="text/javascript">
-        document.title = UnminedMapProperties.worldName + " - " + document.title;
+         document.title = UnminedMapProperties.worldName + " - " + document.title;
 
-        if (UnminedCustomMarkers && UnminedCustomMarkers.isEnabled && UnminedCustomMarkers.markers) {
-            UnminedMapProperties.markers = UnminedMapProperties.markers.concat(UnminedCustomMarkers.markers);
-        }
+    if (UnminedCustomMarkers && UnminedCustomMarkers.isEnabled && UnminedCustomMarkers.markers) {
+        UnminedMapProperties.markers = UnminedMapProperties.markers.concat(UnminedCustomMarkers.markers);
+    }
 
-        let unmined = new Unmined();
+    let unmined = new Unmined();
 
-        if (UnminedPlayers && UnminedPlayers.length > 0) {
-            UnminedMapProperties.markers = UnminedMapProperties.markers.concat(unmined.createPlayerMarkers(UnminedPlayers));
-        }
+    if (UnminedPlayers && UnminedPlayers.length > 0) {
+        UnminedMapProperties.markers = UnminedMapProperties.markers.concat(unmined.createPlayerMarkers(UnminedPlayers));
+    }
 
-        const map = unmined.map('map', UnminedMapProperties, UnminedRegions);
+    const map = unmined.map('map', UnminedMapProperties, UnminedRegions);
 
-        // Add a click event listener to the map
-        map.on('click', function (event) {
-            const coordinates = event.coordinate;
+    // Create a click interaction
+    const clickInteraction = new ol.interaction.Click({
+        handleEvent: function (evt) {
+            const coordinates = ol.proj.toLonLat(evt.coordinate);
             alert('Coordinates: ' + coordinates);
-        });
+        },
+    });
+
+    // Add the click interaction to the map
+    map.addInteraction(clickInteraction);
     </script>
 </body>
 
