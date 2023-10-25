@@ -124,13 +124,18 @@ const map = unmined.map('map', UnminedMapProperties, UnminedRegions);
 map.on('click', function (event) {
     const clickedCoordinates = event.coordinate;
     const coordinatesBox = document.getElementById('clicked-coordinates');
-    const clickedTitle = document.title.split(" - ")[1].trim();
     
-    coordinatesBox.innerHTML = `(${clickedCoordinates[0].toFixed(2)}, ${clickedCoordinates[1].toFixed(2)}) - ${clickedTitle}`;
+    // Extract the text from the " - " section of the DOM manipulation line
+    const domManipulationLine = UnminedMapProperties.worldName;
+    const parts = domManipulationLine.split(" - ");
+    const clickedText = parts[1] || domManipulationLine;
 
-    // Update the top right coordinates box
-    topRightCoordinatesBox.innerHTML = `(${clickedCoordinates[0].toFixed(2)}, ${clickedCoordinates[1].toFixed(2)}) - ${clickedTitle}`;
+    coordinatesBox.innerHTML = `(${clickedText}) - (${clickedCoordinates[0].toFixed(2)}, ${clickedCoordinates[1].toFixed(2)})`;
+
+    // Update the top right coordinates box with just the clicked coordinates
+    topRightCoordinatesBox.innerHTML = `(${clickedCoordinates[0].toFixed(2)}, ${clickedCoordinates[1].toFixed(2)})`;
 });
+
 
     </script>
 </body>
