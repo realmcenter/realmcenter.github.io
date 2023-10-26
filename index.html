@@ -163,6 +163,9 @@
         function toggleDrawing() {
             drawing = !drawing;
             toggleDrawButton.textContent = drawing ? "Stop Drawing" : "Toggle Draw";
+
+            // Control pointer events on the drawing canvas
+            drawingCanvas.style.pointerEvents = drawing ? "auto" : "none";
         }
 
         function clearDrawing() {
