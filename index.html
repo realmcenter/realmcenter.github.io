@@ -129,12 +129,11 @@
     <canvas id="drawingCanvas"></canvas>
 
     <div id="drawingControls">
-        <button id="toggleDraw">Draw</button>
-        <button id="clearDrawing">Clear All</button>
+        <button id="toggleDraw" onclick="toggleDrawing()">Toggle Draw</button>
+        <button id="clearDrawing" onclick="clearDrawing()">Clear All</button>
     </div>
 
     <script type="text/javascript">
-
         document.title = UnminedMapProperties.worldName + " - " + document.title;
 
         if (UnminedCustomMarkers && UnminedCustomMarkers.isEnabled && UnminedCustomMarkers.markers) {
@@ -161,12 +160,9 @@
         let lastX = 0;
         let lastY = 0;
 
-        toggleDrawButton.addEventListener("click", toggleDraw);
-        clearDrawingButton.addEventListener("click", clearDrawing);
-
-        function toggleDraw() {
+        function toggleDrawing() {
             drawing = !drawing;
-            toggleDrawButton.textContent = drawing ? "Stop Drawing" : "Draw";
+            toggleDrawButton.textContent = drawing ? "Stop Drawing" : "Toggle Draw";
         }
 
         function clearDrawing() {
@@ -178,31 +174,34 @@
         drawingCanvas.addEventListener("mousemove", draw);
 
         function startDrawing(e) {
-            drawing = true;
-            lastX = e.clientX - drawingCanvas.getBoundingClientRect().left;
-            lastY = e.clientY - drawingCanvas.getBoundingClientRect().top;
+            if (drawing) {
+                lastX = e.clientX - drawingCanvas.getBoundingClientRect().left;
+                lastY = e.clientY - drawingCanvas.getBoundingClientRect().top;
+            }
         }
 
         function endDrawing() {
-            drawing = false;
+            if (drawing) {
+                drawing = false;
+            }
         }
 
         function draw(e) {
-            if (!drawing) return;
+            if (drawing) {
+                const x = e.clientX - drawingCanvas.getBoundingClientRect().left;
+                const y = e.clientY - drawingCanvas.getBoundingClientRect().top;
 
-            const x = e.clientX - drawingCanvas.getBoundingClientRect().left;
-            const y = e.clientY - drawingCanvas.getBoundingClientRect().top;
+                context.strokeStyle = "red";
+                context.lineWidth = 5;
 
-            context.strokeStyle = "red";
-            context.lineWidth = 5;
+                context.beginPath();
+                context.moveTo(lastX, lastY);
+                context.lineTo(x, y);
+                context.stroke();
 
-            context.beginPath();
-            context.moveTo(lastX, lastY);
-            context.lineTo(x, y);
-            context.stroke();
-
-            lastX = x;
-            lastY = y;
+                lastX = x;
+                lastY = y;
+            }
         }
     </script>
 </body>
