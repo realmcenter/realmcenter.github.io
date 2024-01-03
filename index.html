@@ -28,15 +28,15 @@
             margin-bottom: 20px;
         }
 
-        .button {
-            display: inline-block;
-            padding: 15px 30px;
-            font-size: 18px;
-            text-decoration: none;
-            margin: 10px;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
+        @media only screen and (max-width: 600px) {
+    .button {
+        display: inline-block;
+        width: auto; /* Adjusted width to fit content */
+        box-sizing: border-box;
+        margin-right: 10px; /* Added margin for spacing between buttons */
+    }
+}
+
 
         #view-map {
             background-color: #FFFFFF; /* White button */
