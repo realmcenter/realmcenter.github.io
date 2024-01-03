@@ -1,15 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0;url=https://realmcenter.github.io">
-  <meta content="Realm Invite - Zima Nations" property="og:title">
-  <meta content="A Bedrock Realm Based on War, Diplomacy, Trade, and Politics" property="og:description">
-  <meta content="Zima Nations" property="og:site_name">
-  <meta content="https://api.realmcenter.org/image/DJ-ZimaNations.png" property="og:image">
-  <title>Redirecting...</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zima Nations Realm</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: url('https://media.discordapp.net/attachments/1183184928435875885/1191836565618569217/image.png?ex=65a6e34c&is=65946e4c&hm=a49dab78dc9f47e4d511fd60f9a955d9c761527cd3c7f8acb5b47357be614542&=&format=webp&quality=lossless') no-repeat center center fixed;
+            background-size: cover;
+            color: #FFFFFF; /* White text */
+            font-family: 'Arial', sans-serif;
+        }
+
+        #container {
+            text-align: center;
+        }
+
+        h1, p {
+            margin-bottom: 20px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 18px;
+            text-decoration: none;
+            margin: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        #view-map {
+            background-color: #FFFFFF; /* White button */
+            color: #FF0000; /* Red text */
+        }
+
+        #join-now {
+            background-color: #FF0000; /* Red button */
+            color: #FFFFFF; /* White text */
+        }
+
+        @media only screen and (max-width: 600px) {
+            .button {
+                display: block;
+                width: 100%;
+                box-sizing: border-box;
+            }
+        }
+    </style>
 </head>
 <body>
-  <p>If you are not redirected, <a href="https://realmcenter.github.io">click here</a>.</p>
+    <div id="container">
+        <h1>Welcome to Zima Nations</h1>
+        <p>A Bedrock Realm Based on War, Diplomacy, Trade, and Politics</p>
+        <a href="https://realmcenter.github.io/map.html" class="button" id="view-map">View Map</a>
+        <a href="https://discord.gg/fk6Vw7hJ7F" class="button" id="join-now">Join Now</a>
+    </div>
 </body>
 </html>
