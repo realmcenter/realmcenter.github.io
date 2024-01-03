@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="apple-touch-icon" href="https://api.realmcenter.org/image/DJ-ZimaNations.png"/>
-<link rel="apple-touch-icon" sizes="72x72" href="https://api.realmcenter.org/image/DJ-ZimaNations.png"/>
-<link rel="apple-touch-icon" sizes="114x114" href="https://api.realmcenter.org/image/DJ-ZimaNations.png"/>
+    <link rel="apple-touch-icon" href="https://api.realmcenter.org/image/DJ-ZimaNations.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="https://api.realmcenter.org/image/DJ-ZimaNations.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="https://api.realmcenter.org/image/DJ-ZimaNations.png" />
     <link rel="icon" type="image/x-icon" href="https://api.realmcenter.org/image/DJ-ZimaNations.png">
     <title>Zima App</title>
     <style>
@@ -28,11 +29,12 @@
             text-align: center;
         }
 
-        h1, p {
+        h1,
+        p {
             margin-bottom: 20px;
         }
 
-                .button {
+        .button {
             display: inline-block;
             padding: 15px 30px;
             font-size: 18px;
@@ -42,38 +44,68 @@
             transition: background-color 0.3s ease;
         }
 
-
         #view-map {
+            background-color: #FF0000; /* White button */
+            color: #FFFFFF; /* Red text */
+        }
+
+        #join-now {
+            background-color: #FFFFFF; /* Red button */
+            color: #FF0000; /* White text */
+        }
+
+        #copy-invite {
             background-color: #FFFFFF; /* White button */
             color: #FF0000; /* Red text */
         }
 
-        #join-now {
-            background-color: #FF0000; /* Red button */
-            color: #FFFFFF; /* White text */
-        }
-
         @media only screen and (max-width: 600px) {
-    .button {
-        display: inline-block;
-        width: auto; /* Adjusted width to fit content */
-        box-sizing: border-box;
-        margin-right: 10px; /* Added margin for spacing between buttons */
-    }
-}
- 
+            .button {
+                display: inline-block;
+                width: auto; /* Adjusted width to fit content */
+                box-sizing: border-box;
+                margin-right: 10px; /* Added margin for spacing between buttons */
+            }
+        }
     </style>
 </head>
+
 <body>
     <div id="container">
         <h1>Welcome to Zima Nations</h1>
         <p>A Bedrock Realm Based on War, Diplomacy, Trade, and Politics</p>
-        <a href="https://realmcenter.github.io/map.html" class="button" id="view-map">View Map</a>
+        <a href="#" class="button" id="copy-invite">Copy Invite</a>
         <a href="https://discord.gg/fk6Vw7hJ7F" class="button" id="join-now">Join Now</a>
+        <div><a href="https://realmcenter.github.io/map.html" class="button" id="view-map">View Map</a></div>
         <div class="small-links-container">
             <a href="https://www.youtube.com/watch?v=EbMP03jkX0s" class="small-link">Save as App</a>
         </div>
-
     </div>
+
+    <script>
+        document.getElementById('copy-invite').addEventListener('click', function () {
+            // Create a temporary input element
+            var tempInput = document.createElement('input');
+
+            // Set the input value to the invite link
+            tempInput.value = 'https://realmcenter.github.io/invite.html';
+
+            // Append the input element to the document
+            document.body.appendChild(tempInput);
+
+            // Select the input content
+            tempInput.select();
+
+            // Execute the copy command
+            document.execCommand('copy');
+
+            // Remove the temporary input element
+            document.body.removeChild(tempInput);
+
+            // Alert the user that the link is copied (you can customize this part)
+            alert('Success! Go to Discord and paste the link to share.');
+        });
+    </script>
 </body>
+
 </html>
