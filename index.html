@@ -26,8 +26,24 @@
             transition: background 1s ease-in-out; /* Add transition for smooth fading */
         }
 
+        #loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            z-index: 9999;
+        }
+
         #container {
             text-align: center;
+            z-index: 1;
         }
 
         h1,
@@ -84,6 +100,10 @@
 </head>
 
 <body>
+    <div id="loading-overlay">
+        <p>Loading, this may take up to 30 seconds</p>
+    </div>
+
     <div id="container">
         <h1>Welcome to Zima Nations</h1>
         <p>A Bedrock Realm Based on War, Diplomacy, Trade, and Politics</p>
@@ -110,6 +130,11 @@
         }
 
         setInterval(changeBackground, 30000); // Change background every 30 seconds
+
+        // Hide loading overlay after 15 seconds
+        setTimeout(function () {
+            document.getElementById("loading-overlay").style.display = "none";
+        }, 10000);
     </script>
 </body>
 
