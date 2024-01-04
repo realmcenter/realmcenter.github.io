@@ -23,6 +23,7 @@
             background-size: cover;
             color: #FFFFFF; /* White text */
             font-family: 'Arial', sans-serif;
+            transition: background 1s ease-in-out; /* Add transition for smooth fading */
         }
 
         #container {
@@ -54,17 +55,29 @@
             color: #FF0000; /* White text */
         }
 
+        #copy-invite,
+        .small-link {
+            color: #FFFFFF; /* White text */
+        }
+
         #copy-invite {
             background-color: #FFFFFF; /* White button */
             color: #FF0000; /* Red text */
         }
 
         @media only screen and (max-width: 600px) {
+            h1 {
+                font-size: 24px;
+            }
+
+            p {
+                font-size: 14px;
+            }
+
             .button {
-                display: inline-block;
-                width: auto; /* Adjusted width to fit content */
-                box-sizing: border-box;
-                margin-right: 10px; /* Added margin for spacing between buttons */
+                font-size: 16px;
+                padding: 10px 20px;
+                margin: 5px;
             }
         }
     </style>
@@ -83,28 +96,20 @@
     </div>
 
     <script>
-        document.getElementById('copy-invite').addEventListener('click', function () {
-            // Create a temporary input element
-            var tempInput = document.createElement('input');
+        var backgrounds = [
+            'https://media.discordapp.net/attachments/1056993081498554430/1192256381806456873/3663141F-2A10-41D7-B850-556E499296C5.png?ex=65a86a48&is=6595f548&hm=46aa68b4142a51ab8a8ebba7dc13c2cf3dbe1dcb08438446986ad945f3bcca77&=&format=webp&quality=lossless&width=1202&height=676',
+            'https://media.discordapp.net/attachments/1056993081498554430/1192256382406230076/D93551C4-E38B-4C73-AE57-116117A5973E.png?ex=65a86a48&is=6595f548&hm=0d54bbebf2c221728e6716d2e306e7c138f133f35138a358da6553531c284639&=&format=webp&quality=lossless&width=1202&height=676',
+            'https://media.discordapp.net/attachments/1056993081498554430/1192256382955696288/2EAAB4D1-97AF-45DC-84E8-83B89B8B9DBA.png?ex=65a86a48&is=6595f548&hm=bee41379847372af2ebe5ec4ad9029cedb7a4958907b6540837fbf8a69ea00d1&=&format=webp&quality=lossless&width=1202&height=676'
+        ];
 
-            // Set the input value to the invite link
-            tempInput.value = 'https://realmcenter.github.io/invite.html';
+        var currentBackgroundIndex = 0;
 
-            // Append the input element to the document
-            document.body.appendChild(tempInput);
+        function changeBackground() {
+            document.body.style.backgroundImage = 'url(' + backgrounds[currentBackgroundIndex] + ')';
+            currentBackgroundIndex = (currentBackgroundIndex + 1) % backgrounds.length;
+        }
 
-            // Select the input content
-            tempInput.select();
-
-            // Execute the copy command
-            document.execCommand('copy');
-
-            // Remove the temporary input element
-            document.body.removeChild(tempInput);
-
-            // Alert the user that the link is copied (you can customize this part)
-            alert('Success! Go to Discord and paste the link to share.');
-        });
+        setInterval(changeBackground, 30000); // Change background every 30 seconds
     </script>
 </body>
 
