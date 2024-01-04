@@ -41,6 +41,11 @@
             z-index: 9999;
         }
 
+        #loading-overlay img {
+            width: 50px; /* Adjust the width as needed */
+            height: 50px; /* Adjust the height as needed */
+        }
+
         #container {
             text-align: center;
             z-index: 1;
@@ -101,7 +106,8 @@
 
 <body>
     <div id="loading-overlay">
-        <p>Loading, this may take up to 30 seconds</p>
+        <p>Loading, this may take up to 30 seconds ‎ ‎   ‎ </p>
+        <img src="https://cdn.discordapp.com/attachments/1056993081498554430/1192274745887031306/Rolling-1.1s-141px.gif?ex=65a87b62&is=65960662&hm=3696ccb9af7f820d4f358d5d60991fb5d267d640246adb2633cd1c989f8756b7" alt="Loading GIF">
     </div>
 
     <div id="container">
@@ -121,21 +127,57 @@
             'https://media.discordapp.net/attachments/1056993081498554430/1192256382406230076/D93551C4-E38B-4C73-AE57-116117A5973E.png?ex=65a86a48&is=6595f548&hm=0d54bbebf2c221728e6716d2e306e7c138f133f35138a358da6553531c284639&=&format=webp&quality=lossless&width=1202&height=676',
             'https://media.discordapp.net/attachments/1056993081498554430/1192256382955696288/2EAAB4D1-97AF-45DC-84E8-83B89B8B9DBA.png?ex=65a86a48&is=6595f548&hm=bee41379847372af2ebe5ec4ad9029cedb7a4958907b6540837fbf8a69ea00d1&=&format=webp&quality=lossless&width=1202&height=676'
         ];
-
+    
         var currentBackgroundIndex = 0;
-
+    
+        function preloadImages() {
+            for (var i = 0; i < backgrounds.length; i++) {
+                var img = new Image();
+                img.src = backgrounds[i];
+            }
+        }
+    
         function changeBackground() {
             document.body.style.backgroundImage = 'url(' + backgrounds[currentBackgroundIndex] + ')';
             currentBackgroundIndex = (currentBackgroundIndex + 1) % backgrounds.length;
         }
-
-        setInterval(changeBackground, 30000); // Change background every 30 seconds
-
-        // Hide loading overlay after 15 seconds
+    
+        // Preload images when the script is loaded
+        preloadImages();
+    
+        setInterval(changeBackground, 10000); // Change background every 30 seconds
+    
+        // Hide loading overlay after 10 seconds
         setTimeout(function () {
             document.getElementById("loading-overlay").style.display = "none";
         }, 10000);
     </script>
+    
+
+<script>
+    document.getElementById('copy-invite').addEventListener('click', function () {
+        // Create a temporary input element
+        var tempInput = document.createElement('input');
+
+        // Set the input value to the invite link
+        tempInput.value = 'https://realmcenter.github.io/invite.html';
+
+        // Append the input element to the document
+        document.body.appendChild(tempInput);
+
+        // Select the input content
+        tempInput.select();
+
+        // Execute the copy command
+        document.execCommand('copy');
+
+        // Remove the temporary input element
+        document.body.removeChild(tempInput);
+
+        // Alert the user that the link is copied (you can customize this part)
+        alert('Success! Go to Discord and paste the link to share.');
+    });
+</script>
 </body>
 
 </html>
