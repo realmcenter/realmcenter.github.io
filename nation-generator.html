@@ -3,50 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PDF Generator</title>
-    <script src="https://rawgit.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+    <title>Deed Generator</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 50px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0;
+            color: #555;
+        }
+
+        input {
+            padding: 8px;
+            font-size: 16px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        canvas {
+            display: none;
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        a {
+            display: none;
+            margin-top: 20px;
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
-
     <h1>Deed Generator</h1>
 
-    <form id="deedForm">
-        <label for="property">Deed to:</label>
-        <input type="text" id="property" placeholder="Enter property name">
+    <label for="property">Property:</label>
+    <input type="text" id="property" placeholder="Enter property details">
 
-        <label for="date">Day of:</label>
-        <input type="date" id="date">
+    <label for="date">Date:</label>
+    <input type="date" id="date">
 
-        <label for="nation">Nation:</label>
-        <input type="text" id="nation" placeholder="Enter nation name">
+    <label for="nation">Nation:</label>
+    <input type="text" id="nation" placeholder="Enter nation name">
 
-        <button type="button" onclick="generatePDF()">Generate PDF</button>
-    </form>
+    <button onclick="generateDeed()">Generate Deed</button>
+
+    <canvas id="canvas"></canvas>
+
+    <a id="downloadLink" download="deed.png">
+        <button onclick="downloadPNG()">Download PNG</button>
+    </a>
 
     <script>
-        function generatePDF() {
+        function generateDeed() {
             const property = document.getElementById('property').value;
             const date = document.getElementById('date').value;
             const nation = document.getElementById('nation').value;
-    
-            const content = `
-                <h2>Deed to ${property}</h2>
-                <p>This deed hereby states that on the day of ${date}, ${nation} is a free and independent nation run by its leaders under their own vision.</p>
-            `;
-    
-            html2pdf().from(content).outputPdf(pdf => {
-                const blob = new Blob([pdf], { type: 'application/pdf' });
-                const link = document.createElement('a');
-                link.href = URL.createObjectURL(blob);
-                link.download = 'Deed.pdf';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
+
+            const deedText = `Deed to ${property}\n\nThis deed hereby states that on the day of ${date}, ${nation} is a free and independent nation run by its leaders under their own vision.`;
+
+            drawTextOnCanvas(deedText);
+        }
+
+        function drawTextOnCanvas(text) {
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+
+            canvas.width = 500;
+            canvas.height = 200;
+
+            ctx.font = '20px Arial';
+            ctx.fillStyle = '#333';
+            ctx.textAlign = 'left';
+            ctx.textBaseline = 'top';
+
+            const lines = text.split('\n');
+            let y = 10;
+
+            lines.forEach(line => {
+                ctx.fillText(line, 10, y);
+                y += 30;
             });
+
+            document.getElementById('canvas').style.display = 'block';
+            document.getElementById('downloadLink').style.display = 'block';
+        }
+
+        function downloadPNG() {
+            const canvas = document.getElementById('canvas');
+            const downloadLink = document.getElementById('downloadLink');
+            const image = canvas.toDataURL('image/png');
+
+            downloadLink.href = image;
+            downloadLink.click();
         }
     </script>
-    
-
-
 </body>
 </html>
