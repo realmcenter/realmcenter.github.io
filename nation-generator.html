@@ -1,80 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document Generator</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap">
-  <style>
-    body {
-      font-family: 'Great Vibes', cursive;
-      background-color: #f4e5d1; /* Old paper color */
-      margin: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-    #document {
-      background-color: white;
-      padding: 20px;
-      border: 1px solid black;
-      text-align: center;
-    }
-    input {
-      margin: 10px;
-      padding: 5px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Generator</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Great Vibes', cursive;
+            background-color: #f5f3da;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            max-width: 400px;
+            margin-bottom: 20px;
+        }
+
+        #generated-document {
+            display: none;
+        }
+    </style>
 </head>
 <body>
-  <div id="document">
-    <h1>Deed to <span id="countryName"></span></h1>
-    <p>This deed hereby states that on the day of <span id="date"></span>, <span id="countryFullName"></span> is a free and independent nation run by its leaders under their own vision of what the ideal society should display. This deed expires the day that the last citizen ceases to be or the nation is disbanded by itself or a foreign entity. The leader of this new nation, <span id="leaderName"></span>, will do their very best to bring prosperity and peace to all people within.</p>
-    <p>Signed and Confirmed, <span id="signature"></span></p>
-  </div>
-  <script>
-    function generateDocument() {
-      const countryName = document.getElementById('countryName').value;
-      const date = document.getElementById('date').value;
-      const countryFullName = document.getElementById('countryFullName').value;
-      const leaderName = document.getElementById('leaderName').value;
-      const signature = document.getElementById('signature').value;
 
-      const documentContent = `
-        <h1>Deed to ${countryName}</h1>
-        <p>This deed hereby states that on the day of ${date}, ${countryFullName} is a free and independent nation run by its leaders under their own vision of what the ideal society should display. This deed expires the day that the last citizen ceases to be or the nation is disbanded by itself or a foreign entity. The leader of this new nation, ${leaderName}, will do their very best to bring prosperity and peace to all people within.</p>
-        <p>Signed and Confirmed, ${signature}</p>
-      `;
+    <form id="document-form">
+        <label for="country">Country Name:</label>
+        <input type="text" id="country" required placeholder="Italy">
 
-      const pdfOptions = {
-        margin: 10,
-        filename: 'generated_document.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-      };
+        <label for="date">Date:</label>
+        <input type="date" id="date" required>
 
-      html2pdf().from(documentContent).set(pdfOptions).outputPdf();
-    }
-  </script>
+        <label for="full-country-name">Country Full Name:</label>
+        <input type="text" id="full-country-name" required placeholder="The Democratic Republic of Italy">
 
-  <label for="countryName">Country Name: </label>
-  <input type="text" id="countryName" value="Italy"><br>
+        <label for="leader-name">Leader Name:</label>
+        <input type="text" id="leader-name" required placeholder="John">
 
-  <label for="date">Date: </label>
-  <input type="date" id="date"><br>
+        <button type="button" onclick="generateDocument()">Generate Document</button>
+    </form>
 
-  <label for="countryFullName">Country Full Name: </label>
-  <input type="text" id="countryFullName" value="The Democratic Republic of Italy"><br>
+    <div id="generated-document"></div>
 
-  <label for="leaderName">Leader Name: </label>
-  <input type="text" id="leaderName" value="John"><br>
+    <script>
+        function generateDocument() {
+            const country = document.getElementById('country').value;
+            const date = document.getElementById('date').value;
+            const fullCountryName = document.getElementById('full-country-name').value;
+            const leaderName = document.getElementById('leader-name').value;
 
-  <label for="signature">Signature: </label>
-  <input type="text" id="signature"><br>
+            const documentText = `
+                <p>Deed to ${country}</p>
+                <p>This deed hereby states that on the day of ${date}, ${fullCountryName} is a free and independent nation run by its leaders under their own vision of what the ideal society should display. This deed expires the day that the last citizen ceases to be or the nation is disbanded by itself or a foreign entity. The leader of this new nation, ${leaderName}, will do their very best to bring prosperity and peace to all people within.</p>
+                <p>Signed and Confirmed, ______________</p>
+            `;
 
-  <button onclick="generateDocument()">Generate Document</button>
-  <script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+            const generatedDocument = document.getElementById('generated-document');
+            generatedDocument.innerHTML = documentText;
+            generatedDocument.style.display = 'block';
+
+            // Hide the form
+            document.getElementById('document-form').style.display = 'none';
+        }
+    </script>
+
 </body>
 </html>
