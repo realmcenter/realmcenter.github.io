@@ -6,20 +6,21 @@
     <title>Deed Generator</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
+            font-family: 'Cursive', sans-serif;
+            background: url('https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvcHgxMDU3NDA0LWltYWdlLWpvYjYzMC1pLWwwZzA3MG13LmpwZw.jpg') no-repeat center center fixed;
+            background-size: cover;
             text-align: center;
             margin: 50px;
+            color: #fff;
         }
 
         h1 {
-            color: #333;
+            color: #fff;
         }
 
         label {
             display: block;
             margin: 10px 0;
-            color: #555;
         }
 
         input {
@@ -54,6 +55,7 @@
             display: none;
             margin-top: 20px;
             text-decoration: none;
+            color: #fff;
         }
     </style>
 </head>
@@ -92,20 +94,20 @@
             const canvas = document.getElementById('canvas');
             const ctx = canvas.getContext('2d');
 
-            canvas.width = 500;
-            canvas.height = 200;
+            canvas.width = 800;
+            canvas.height = 400;
 
-            ctx.font = '20px Arial';
-            ctx.fillStyle = '#333';
+            ctx.font = 'bold 30px Cursive';
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
             ctx.textAlign = 'left';
             ctx.textBaseline = 'top';
 
             const lines = text.split('\n');
-            let y = 10;
+            let y = 20;
 
             lines.forEach(line => {
-                ctx.fillText(line, 10, y);
-                y += 30;
+                ctx.fillText(line, 20, y);
+                y += 40;
             });
 
             document.getElementById('canvas').style.display = 'block';
