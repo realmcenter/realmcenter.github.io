@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Deed Generator</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap">
     <style>
         body {
-            font-family: 'Cursive', sans-serif;
+            font-family: 'Great Vibes', cursive;
             text-align: center;
             margin: 50px;
             color: #000;
@@ -99,25 +100,25 @@
             const canvas = document.getElementById('canvas');
             const ctx = canvas.getContext('2d');
 
-            canvas.width = 800;
-            canvas.height = 400;
+            canvas.width = 850;
+            canvas.height = 1100;
 
             // Background Image
             const backgroundImage = new Image();
             backgroundImage.src = 'https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvcHgxMDU3NDA0LWltYWdlLWpvYjYzMC1pLWwwZzA3MG13LmpwZw.jpg';
             ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
 
-            ctx.font = 'bold 24px Cursive';
+            ctx.font = 'bold 24px "Great Vibes"';
             ctx.fillStyle = 'black';
             ctx.textAlign = 'left';
             ctx.textBaseline = 'top';
 
             const lines = text.split('\n');
-            let y = 20;
+            let y = 180;
 
             lines.forEach(line => {
-                ctx.fillText(line, 40, y);
-                y += 30;
+                ctx.fillText(line, 40, y, 770);
+                y += 40;
             });
 
             document.getElementById('canvas').style.display = 'block';
@@ -135,3 +136,4 @@
     </script>
 </body>
 </html>
+
