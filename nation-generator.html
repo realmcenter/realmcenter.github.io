@@ -56,8 +56,9 @@
         <label for="leader-name">Leader Name:</label>
         <input type="text" id="leader-name" required placeholder="John">
 
-        <label for="flag">Flag (Link or File Upload):</label>
-        <input type="text" id="flag" placeholder="https://example.com/flag.jpg">
+        <label for="flag">Flag (File Upload):</label>
+        <input type="file" id="flag" accept="image/*">
+
 
 
         <button type="button" onclick="generateDocument()">Generate Document</button>
@@ -70,27 +71,37 @@ function generateDocument() {
     const date = document.getElementById('date').value;
     const fullCountryName = document.getElementById('full-country-name').value;
     const leaderName = document.getElementById('leader-name').value;
-    const flag = document.getElementById('flag').value;
+    const flagInput = document.getElementById('flag');
+    const flag = flagInput.files[0];
 
-    const documentText = `
-        <p>Deed to ${country}</p>
-        <p>This deed hereby states that on the day of ${date}, ${fullCountryName} is a free and independent nation run by its leaders under their own vision of what the ideal society should display. This deed expires the day that the last citizen ceases to be or the nation is disbanded by itself or a foreign entity. The leader of this new nation, ${leaderName}, will do their very best to bring prosperity and peace to all people within its borders. In fulfilling this commitment, the leader vows to prioritize the well-being of its citizens and forge alliances with other nations based on mutual respect and cooperation.</p>
-        <p>Flag: <img src="${flag}" alt="Flag"></p>
-        <p>Signed and Confirmed by (Admin Only), ______________</p>
-    `;
+    if (flag) {
+        const reader = new FileReader();
 
-    const generatedDocument = document.getElementById('generated-document');
-    generatedDocument.innerHTML = documentText;
-    generatedDocument.style.display = 'block';
+        reader.onload = function (e) {
+            const documentText = `
+                <p>Deed to ${country}</p>
+                <p>This deed hereby states that on the day of ${date}, ${fullCountryName} is a free and independent nation run by its leaders under their own vision of what the ideal society should display. This deed expires the day that the last citizen ceases to be or the nation is disbanded by itself or a foreign entity. The leader of this new nation, ${leaderName}, will do their very best to bring prosperity and peace to all people within its borders. In fulfilling this commitment, the leader vows to prioritize the well-being of its citizens and forge alliances with other nations based on mutual respect and cooperation.</p>
+                <p>Flag: <img src="${e.target.result}" alt="Flag" style="max-width: 100px;"></p>
+                <p>Signed and Confirmed by (Admin Only), ______________</p>
+            `;
 
-    // Hide the form
-    document.getElementById('document-form').style.display = 'none';
+            const generatedDocument = document.getElementById('generated-document');
+            generatedDocument.innerHTML = documentText;
+            generatedDocument.style.display = 'block';
 
-    // Change the background image
-    document.body.style.backgroundImage = 'url(https://assets.mattepaint.com/blog/2020/06/18-1.jpg)';
-    document.body.style.backgroundSize = 'cover';
-    document.body.style.backgroundPosition = 'center';
+            // Hide the form
+            document.getElementById('document-form').style.display = 'none';
+
+            // Change the background image
+            document.body.style.backgroundImage = 'url(https://assets.mattepaint.com/blog/2020/06/18-1.jpg)';
+            document.body.style.backgroundSize = 'cover';
+            document.body.style.backgroundPosition = 'center';
+        };
+
+        reader.readAsDataURL(flag);
+    }
 }
+
 </script>
 
 
