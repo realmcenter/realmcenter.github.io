@@ -8,74 +8,73 @@
   <style>
     body {
       font-family: 'Great Vibes', cursive;
-      background-color: #f4ede6; /* Old paper color */
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
+      background-color: #f4e5d1; /* Old paper color */
       margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
     #document {
       background-color: white;
       padding: 20px;
-      max-width: 800px;
+      border: 1px solid black;
       text-align: center;
-      border: 1px solid #000;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+    input {
+      margin: 10px;
+      padding: 5px;
     }
   </style>
 </head>
 <body>
   <div id="document">
-    <h2>Deed to <span id="countryName"></span></h2>
+    <h1>Deed to <span id="countryName"></span></h1>
     <p>This deed hereby states that on the day of <span id="date"></span>, <span id="countryFullName"></span> is a free and independent nation run by its leaders under their own vision of what the ideal society should display. This deed expires the day that the last citizen ceases to be or the nation is disbanded by itself or a foreign entity. The leader of this new nation, <span id="leaderName"></span>, will do their very best to bring prosperity and peace to all people within.</p>
     <p>Signed and Confirmed, <span id="signature"></span></p>
   </div>
-
   <script>
     function generateDocument() {
-      const countryName = document.getElementById('countryName').innerText;
-      const date = document.getElementById('date').innerText;
-      const countryFullName = document.getElementById('countryFullName').innerText;
-      const leaderName = document.getElementById('leaderName').innerText;
-      const signature = document.getElementById('signature').innerText;
+      const countryName = document.getElementById('countryName').value;
+      const date = document.getElementById('date').value;
+      const countryFullName = document.getElementById('countryFullName').value;
+      const leaderName = document.getElementById('leaderName').value;
+      const signature = document.getElementById('signature').value;
 
-      const content = `
-        Deed to ${countryName}
-
-        This deed hereby states that on the day of ${date}, ${countryFullName} is a free and independent nation run by its leaders under their own vision of what the ideal society should display. This deed expires the day that the last citizen ceases to be or the nation is disbanded by itself or a foreign entity. The leader of this new nation, ${leaderName}, will do their very best to bring prosperity and peace to all people within.
-
-        Signed and Confirmed, ${signature}
+      const documentContent = `
+        <h1>Deed to ${countryName}</h1>
+        <p>This deed hereby states that on the day of ${date}, ${countryFullName} is a free and independent nation run by its leaders under their own vision of what the ideal society should display. This deed expires the day that the last citizen ceases to be or the nation is disbanded by itself or a foreign entity. The leader of this new nation, ${leaderName}, will do their very best to bring prosperity and peace to all people within.</p>
+        <p>Signed and Confirmed, ${signature}</p>
       `;
 
-      // Create a hidden element to hold the content
-      const element = document.createElement('a');
-      element.style.display = 'none';
-      document.body.appendChild(element);
+      const pdfOptions = {
+        margin: 10,
+        filename: 'generated_document.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
 
-      // Create a Blob containing the document text
-      const blob = new Blob([content], { type: 'application/pdf' });
-
-      // Create a URL for the Blob and trigger a download
-      const url = window.URL.createObjectURL(blob);
-      element.href = url;
-      element.download = 'generated_document.pdf';
-      element.click();
-
-      // Clean up
-      window.URL.revokeObjectURL(url);
-      document.body.removeChild(element);
+      html2pdf().from(documentContent).set(pdfOptions).outputPdf();
     }
-
-    // Set example values
-    document.getElementById('countryName').innerText = 'Italy';
-    document.getElementById('date').innerText = '__/__/__';
-    document.getElementById('countryFullName').innerText = 'The Democratic Republic of Italy';
-    document.getElementById('leaderName').innerText = 'John';
-    document.getElementById('signature').innerText = '__________';
-
-    // Generate document on page load
-    generateDocument();
   </script>
+
+  <label for="countryName">Country Name: </label>
+  <input type="text" id="countryName" value="Italy"><br>
+
+  <label for="date">Date: </label>
+  <input type="date" id="date"><br>
+
+  <label for="countryFullName">Country Full Name: </label>
+  <input type="text" id="countryFullName" value="The Democratic Republic of Italy"><br>
+
+  <label for="leaderName">Leader Name: </label>
+  <input type="text" id="leaderName" value="John"><br>
+
+  <label for="signature">Signature: </label>
+  <input type="text" id="signature"><br>
+
+  <button onclick="generateDocument()">Generate Document</button>
+  <script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
 </body>
 </html>
