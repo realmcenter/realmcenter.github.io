@@ -103,10 +103,10 @@
             canvas.width = 800;
             canvas.height = 1100;
 
-            // Use a proxy URL to load the image and enable cross-origin requests
+            // Background Image
             const backgroundImage = new Image();
             backgroundImage.crossOrigin = "Anonymous";
-            backgroundImage.src = 'https://cors-anywhere.herokuapp.com/https://thegraphicsfairy.com/wp-content/uploads/2020/07/Blank-Patina-Paper-2-GraphicsFairy.jpg';
+            backgroundImage.src = 'https://storage.googleapis.com/webdesignledger.pub.network/LaT/edd/2016/02/tan-vintage-paper-texture-31-270x414.jpg';
 
             backgroundImage.onload = function() {
                 ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
