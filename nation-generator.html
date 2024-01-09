@@ -3,138 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deed Generator</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap">
+    <title>Document Generator</title>
     <style>
         body {
+            background-color: #f8eedf; /* Old paper color */
             font-family: 'Great Vibes', cursive;
-            text-align: center;
-            margin: 50px;
-            color: #000;
+            margin: 20px;
         }
 
-        h1 {
-            color: #000;
+        #document-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
         }
 
-        label {
-            display: block;
-            margin: 10px 0;
-        }
-
-        input {
-            padding: 8px;
-            font-size: 16px;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        button {
-            background-color: #4caf50;
-            color: white;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            border: none;
-            border-radius: 5px;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-
-        canvas {
-            display: none;
+        #output {
             margin-top: 20px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        a {
-            display: none;
-            margin-top: 20px;
-            text-decoration: none;
-            color: #000;
-            display: block;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
         }
     </style>
 </head>
 <body>
-    <h1>Deed Generator</h1>
+    <div id="document-container">
+        <h2>Document Generator</h2>
+        <label for="countryName">Country Name:</label>
+        <input type="text" id="countryName" placeholder="Italy"><br>
 
-    <label for="property">Property:</label>
-    <input type="text" id="property" placeholder="Enter property details">
+        <label for="date">Date:</label>
+        <input type="text" id="date" placeholder="__/__/__"><br>
 
-    <label for="date">Date:</label>
-    <input type="date" id="date">
+        <label for="countryFullName">Country Full Name:</label>
+        <input type="text" id="countryFullName" placeholder="The Democratic Republic of Italy"><br>
 
-    <label for="nation">Nation:</label>
-    <input type="text" id="nation" placeholder="Enter nation name">
+        <label for="leaderName">Leader Name:</label>
+        <input type="text" id="leaderName" placeholder="John"><br>
 
-    <button onclick="generateDeed()">Generate Deed</button>
+        <button onclick="generateDocument()">Generate Document</button>
 
-    <canvas id="canvas"></canvas>
-
-    <a id="downloadLink" download="deed.png">
-        <button onclick="downloadPNG()">Download PNG</button>
-    </a>
+        <div id="output"></div>
+    </div>
 
     <script>
-        function generateDeed() {
-            const property = document.getElementById('property').value;
-            const date = document.getElementById('date').value;
-            const nation = document.getElementById('nation').value;
+        function generateDocument() {
+            const countryName = document.getElementById('countryName').value || '__________';
+            const date = document.getElementById('date').value || '__/__/__';
+            const countryFullName = document.getElementById('countryFullName').value || 'The Democratic Republic of ________';
+            const leaderName = document.getElementById('leaderName').value || '__________';
 
-            const deedText = `Deed to ${property}\n\nThis deed hereby states that on the day of ${date}, ${nation} is a free and independent nation run by its leaders under their own vision.`;
+            const documentText = `Deed to ${countryName}\n\nThis deed hereby states that on the day of ${date}, ${countryFullName} is a free and independent nation run by its leaders under their own vision of what the ideal society should display. This deed expires the day that the last citizen ceases to be or the nation is disbanded by itself or a foreign entity. The leader of this new nation, ${leaderName}, will do their very best to bring prosperity and peace to all people within.\n\nSigned and Confirmed, ______________`;
 
-            drawTextOnCanvas(deedText);
-        }
-
-        function drawTextOnCanvas(text) {
-            const canvas = document.getElementById('canvas');
-            const ctx = canvas.getContext('2d');
-
-            canvas.width = 800;
-            canvas.height = 1100;
-
-            // Background Image
-            const backgroundImage = new Image();
-            backgroundImage.crossOrigin = "Anonymous";
-            backgroundImage.src = 'https://storage.googleapis.com/webdesignledger.pub.network/LaT/edd/2016/02/tan-vintage-paper-texture-31-270x414.jpg';
-
-            backgroundImage.onload = function() {
-                ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
-                ctx.font = 'bold 24px "Great Vibes"';
-                ctx.fillStyle = 'black';
-                ctx.textAlign = 'left';
-                ctx.textBaseline = 'top';
-
-                const lines = text.split('\n');
-                let y = 180;
-
-                lines.forEach(line => {
-                    ctx.fillText(line, 40, y, 770);
-                    y += 40;
-                });
-
-                document.getElementById('canvas').style.display = 'block';
-                document.getElementById('downloadLink').style.display = 'block';
-            };
-        }
-
-        function downloadPNG() {
-            const canvas = document.getElementById('canvas');
-            const downloadLink = document.getElementById('downloadLink');
-            const image = canvas.toDataURL('image/png');
-
-            downloadLink.href = image;
-            downloadLink.click();
+            const outputContainer = document.getElementById('output');
+            outputContainer.textContent = documentText;
         }
     </script>
 </body>
