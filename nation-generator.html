@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Generator</title>
+    <script src="https://rawgit.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+</head>
+<body>
+
+    <h1>Deed Generator</h1>
+
+    <form id="deedForm">
+        <label for="property">Deed to:</label>
+        <input type="text" id="property" placeholder="Enter property name">
+
+        <label for="date">Day of:</label>
+        <input type="date" id="date">
+
+        <label for="nation">Nation:</label>
+        <input type="text" id="nation" placeholder="Enter nation name">
+
+        <button type="button" onclick="generatePDF()">Generate PDF</button>
+    </form>
+
+    <script>
+        function generatePDF() {
+            const property = document.getElementById('property').value;
+            const date = document.getElementById('date').value;
+            const nation = document.getElementById('nation').value;
+    
+            const content = `
+                <h2>Deed to ${property}</h2>
+                <p>This deed hereby states that on the day of ${date}, ${nation} is a free and independent nation run by its leaders under their own vision.</p>
+            `;
+    
+            html2pdf().from(content).outputPdf(pdf => {
+                const blob = new Blob([pdf], { type: 'application/pdf' });
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = 'Deed.pdf';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            });
+        }
+    </script>
+    
+
+
+</body>
+</html>
