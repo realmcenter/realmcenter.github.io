@@ -100,29 +100,32 @@
             const canvas = document.getElementById('canvas');
             const ctx = canvas.getContext('2d');
 
-            canvas.width = 850;
+            canvas.width = 800;
             canvas.height = 1100;
 
             // Background Image
             const backgroundImage = new Image();
-            backgroundImage.src = 'https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvcHgxMDU3NDA0LWltYWdlLWpvYjYzMC1pLWwwZzA3MG13LmpwZw.jpg';
-            ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
+            backgroundImage.crossOrigin = "Anonymous"; // Enable cross-origin requests for the image
+            backgroundImage.src = 'https://thegraphicsfairy.com/wp-content/uploads/2020/07/Blank-Patina-Paper-2-GraphicsFairy.jpg';
+            
+            backgroundImage.onload = function() {
+                ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
+                ctx.font = 'bold 24px "Great Vibes"';
+                ctx.fillStyle = 'black';
+                ctx.textAlign = 'left';
+                ctx.textBaseline = 'top';
 
-            ctx.font = 'bold 24px "Great Vibes"';
-            ctx.fillStyle = 'black';
-            ctx.textAlign = 'left';
-            ctx.textBaseline = 'top';
+                const lines = text.split('\n');
+                let y = 180;
 
-            const lines = text.split('\n');
-            let y = 180;
+                lines.forEach(line => {
+                    ctx.fillText(line, 40, y, 770);
+                    y += 40;
+                });
 
-            lines.forEach(line => {
-                ctx.fillText(line, 40, y, 770);
-                y += 40;
-            });
-
-            document.getElementById('canvas').style.display = 'block';
-            document.getElementById('downloadLink').style.display = 'block';
+                document.getElementById('canvas').style.display = 'block';
+                document.getElementById('downloadLink').style.display = 'block';
+            };
         }
 
         function downloadPNG() {
@@ -136,4 +139,3 @@
     </script>
 </body>
 </html>
-
