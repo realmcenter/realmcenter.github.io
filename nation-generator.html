@@ -1,62 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document Generator</title>
-    <style>
-        body {
-            background-color: #f8eedf; /* Old paper color */
-            font-family: 'Great Vibes', cursive;
-            margin: 20px;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deed Generator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f9f1da; /* Old paper color */
+      font-family: 'Great Vibes', cursive;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
 
-        #document-container {
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-        }
+    #document-container {
+      background-color: white;
+      padding: 20px;
+      width: 600px; /* Adjust the width as needed */
+      text-align: justify;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
 
-        #output {
-            margin-top: 20px;
-        }
-    </style>
+    input {
+      margin-bottom: 10px;
+      width: 100%;
+      padding: 5px;
+    }
+
+    button {
+      padding: 10px;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-    <div id="document-container">
-        <h2>Document Generator</h2>
-        <label for="countryName">Country Name:</label>
-        <input type="text" id="countryName" placeholder="Italy"><br>
+  <div id="document-container">
+    <label for="countryName">Country Name:</label>
+    <input type="text" id="countryName">
 
-        <label for="date">Date:</label>
-        <input type="text" id="date" placeholder="__/__/__"><br>
+    <label for="date">Date:</label>
+    <input type="date" id="date">
 
-        <label for="countryFullName">Country Full Name:</label>
-        <input type="text" id="countryFullName" placeholder="The Democratic Republic of Italy"><br>
+    <label for="countryFullName">Country Full Name:</label>
+    <input type="text" id="countryFullName">
 
-        <label for="leaderName">Leader Name:</label>
-        <input type="text" id="leaderName" placeholder="John"><br>
+    <label for="leaderName">Leader Name:</label>
+    <input type="text" id="leaderName">
 
-        <button onclick="generateDocument()">Generate Document</button>
+    <button onclick="generateAndSaveImage()">Generate and Save</button>
 
-        <div id="output"></div>
-    </div>
+    <div id="output"></div>
+  </div>
 
-    <script>
-        function generateDocument() {
-            const countryName = document.getElementById('countryName').value || '__________';
-            const date = document.getElementById('date').value || '__/__/__';
-            const countryFullName = document.getElementById('countryFullName').value || 'The Democratic Republic of ________';
-            const leaderName = document.getElementById('leaderName').value || '__________';
+  <script>
+    function generateAndSaveImage() {
+      const countryName = document.getElementById('countryName').value || '__________';
+      const date = document.getElementById('date').value || '__/__/__';
+      const countryFullName = document.getElementById('countryFullName').value || 'The Democratic Republic of ________';
+      const leaderName = document.getElementById('leaderName').value || '__________';
 
-            const documentText = `Deed to ${countryName}\n\nThis deed hereby states that on the day of ${date}, ${countryFullName} is a free and independent nation run by its leaders under their own vision of what the ideal society should display. This deed expires the day that the last citizen ceases to be or the nation is disbanded by itself or a foreign entity. The leader of this new nation, ${leaderName}, will do their very best to bring prosperity and peace to all people within.\n\nSigned and Confirmed, ______________`;
+      const deedText = `Deed to ${countryName}\n\nThis deed hereby states that on the day of ${date}, ${countryFullName} is a free and independent nation run by its leaders under their own vision of what the ideal society should display. This deed expires the day that the last citizen ceases to be or the nation is disbanded by itself or a foreign entity. The leader of this new nation, ${leaderName}, will do their very best to bring prosperity and peace to all people within.\n\nSigned and Confirmed, ______________`;
 
-            const outputContainer = document.getElementById('output');
-            outputContainer.textContent = documentText;
-        }
-    </script>
+      document.getElementById('output').innerText = deedText;
+
+      // You can use a library like html2canvas to convert the content to an image and save it as PNG.
+      // See https://html2canvas.hertzen.com/ for details.
+    }
+  </script>
 </body>
 </html>
+
