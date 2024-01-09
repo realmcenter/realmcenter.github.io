@@ -8,52 +8,91 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
     <style>
-        /* ... (existing styles) ... */
+        body {
+            font-family: 'Great Vibes', cursive;
+            background-color: #f5f3da;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            max-width: 400px;
+            margin-bottom: 20px;
+        }
+
+        #generated-document {
+            display: none;
+            max-width: 400px;
+            text-align: left;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 <body>
 
     <form id="document-form">
-        <!-- ... (existing form fields) ... -->
+        <label for="country">Country Name:</label>
+        <input type="text" id="country" required placeholder="Italy">
 
-        <!-- New input field for flag -->
-        <label for="flag">Flag URL:</label>
-        <input type="text" id="flag" required placeholder="https://example.com/flag.png">
+        <label for="date">Date:</label>
+        <input type="date" id="date" required>
+
+        <label for="full-country-name">Country Full Name:</label>
+        <input type="text" id="full-country-name" required placeholder="The Democratic Republic of Italy">
+
+        <label for="leader-name">Leader Name:</label>
+        <input type="text" id="leader-name" required placeholder="John">
+
+        <label for="flag">Flag (Link or File Upload):</label>
+        <input type="text" id="flag" placeholder="https://example.com/flag.jpg">
+
 
         <button type="button" onclick="generateDocument()">Generate Document</button>
     </form>
 
     <div id="generated-document"></div>
-
 <script>
-    function generateDocument() {
-        const country = document.getElementById('country').value;
-        const date = document.getElementById('date').value;
-        const fullCountryName = document.getElementById('full-country-name').value;
-        const leaderName = document.getElementById('leader-name').value;
-        const flagUrl = document.getElementById('flag').value; // New line to get flag input value
+function generateDocument() {
+    const country = document.getElementById('country').value;
+    const date = document.getElementById('date').value;
+    const fullCountryName = document.getElementById('full-country-name').value;
+    const leaderName = document.getElementById('leader-name').value;
+    const flag = document.getElementById('flag').value;
 
-        const documentText = `
-            <p>Deed to ${country}</p>
-            <p>This deed hereby states that on the day of ${date}, ${fullCountryName} is a free and independent nation run by its leaders under their own vision of what the ideal society should display. This deed expires the day that the last citizen ceases to be or the nation is disbanded by itself or a foreign entity. The leader of this new nation, ${leaderName}, will do their very best to bring prosperity and peace to all people within its borders. In fulfilling this commitment, the leader vows to prioritize the well-being of its citizens and forge alliances with other nations based on mutual respect and cooperation.</p>
-            <p>Signed and Confirmed by (Admin Only), ______________</p>
-            <!-- Display the flag image at the end of the document -->
-            <img src="${flagUrl}" alt="${country} Flag" style="max-width: 100%; border-radius: 10px; margin-top: 20px;">
-        `;
+    const documentText = `
+        <p>Deed to ${country}</p>
+        <p>This deed hereby states that on the day of ${date}, ${fullCountryName} is a free and independent nation run by its leaders under their own vision of what the ideal society should display. This deed expires the day that the last citizen ceases to be or the nation is disbanded by itself or a foreign entity. The leader of this new nation, ${leaderName}, will do their very best to bring prosperity and peace to all people within its borders. In fulfilling this commitment, the leader vows to prioritize the well-being of its citizens and forge alliances with other nations based on mutual respect and cooperation.</p>
+        <p>Flag: <img src="${flag}" alt="Flag"></p>
+        <p>Signed and Confirmed by (Admin Only), ______________</p>
+    `;
 
-        const generatedDocument = document.getElementById('generated-document');
-        generatedDocument.innerHTML = documentText;
-        generatedDocument.style.display = 'block';
+    const generatedDocument = document.getElementById('generated-document');
+    generatedDocument.innerHTML = documentText;
+    generatedDocument.style.display = 'block';
 
-        // Hide the form
-        document.getElementById('document-form').style.display = 'none';
+    // Hide the form
+    document.getElementById('document-form').style.display = 'none';
 
-        // Change the background image
-        document.body.style.backgroundImage = 'url(https://assets.mattepaint.com/blog/2020/06/18-1.jpg)';
-        document.body.style.backgroundSize = 'cover';
-        document.body.style.backgroundPosition = 'center';
-    }
+    // Change the background image
+    document.body.style.backgroundImage = 'url(https://assets.mattepaint.com/blog/2020/06/18-1.jpg)';
+    document.body.style.backgroundSize = 'cover';
+    document.body.style.backgroundPosition = 'center';
+}
 </script>
+
 
 </body>
 </html>
