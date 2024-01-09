@@ -103,11 +103,11 @@
             canvas.width = 800;
             canvas.height = 1100;
 
-            // Background Image
+            // Use a proxy URL to load the image and enable cross-origin requests
             const backgroundImage = new Image();
-            backgroundImage.crossOrigin = "Anonymous"; // Enable cross-origin requests for the image
-            backgroundImage.src = 'https://thegraphicsfairy.com/wp-content/uploads/2020/07/Blank-Patina-Paper-2-GraphicsFairy.jpg';
-            
+            backgroundImage.crossOrigin = "Anonymous";
+            backgroundImage.src = 'https://cors-anywhere.herokuapp.com/https://thegraphicsfairy.com/wp-content/uploads/2020/07/Blank-Patina-Paper-2-GraphicsFairy.jpg';
+
             backgroundImage.onload = function() {
                 ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
                 ctx.font = 'bold 24px "Great Vibes"';
