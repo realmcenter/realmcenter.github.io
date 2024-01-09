@@ -3,78 +3,64 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Deed Generator</title>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
   <style>
     body {
-      background-color: #f9f1da; /* Old paper color */
       font-family: 'Great Vibes', cursive;
-      margin: 0;
-      padding: 0;
+      background-color: #f5f5dc; /* Old paper color */
       display: flex;
       align-items: center;
       justify-content: center;
       height: 100vh;
+      margin: 0;
     }
 
     #document-container {
       background-color: white;
       padding: 20px;
-      width: 600px; /* Adjust the width as needed */
-      text-align: justify;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    }
-
-    input {
-      margin-bottom: 10px;
-      width: 100%;
-      padding: 5px;
-    }
-
-    button {
-      padding: 10px;
-      background-color: #4caf50;
-      color: white;
-      border: none;
-      cursor: pointer;
-      padding-bottom:10px;
+      width: 595px; /* Standard document width */
+      height: 842px; /* Standard document height */
+      position: relative;
     }
   </style>
 </head>
 <body>
-  <div id="document-container">
-    <label for="countryName">Country‎‎ Name:</label>
-    <input type="text" id="countryName">
 
-    <label for="date">Date:</label>
-    <input type="date" id="date">
+<div id="document-container">
+  <p>Deed to <span id="countryName">__________</span></p>
+  <p>This deed hereby states that on the day of <span id="date">__/__/__</span>, <span id="countryFullName">__________</span> is a free and independent nation run by its leaders under their own vision of what the ideal society should display. This deed expires the day that the last citizen ceases to be or the nation is disbanded by itself or a foreign entity. The leader of this new nation, <span id="leaderName">__________</span>, will do their very best to bring prosperity and peace to all people within.</p>
+  <p>Signed and Confirmed, <span id="signature">______________</span></p>
+</div>
 
-    <label for="countryFullName">Country‎ Full‎ Name:</label>
-    <input type="text" id="countryFullName">
+<button onclick="generateDocument()">Generate and Save as PNG</button>
 
-    <label for="leaderName">Leader‎ Name:</label>
-    <input type="text" id="leaderName">
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+<script>
+  function generateDocument() {
+    // Get values from input fields
+    var countryName = document.getElementById("countryName").innerText;
+    var date = document.getElementById("date").innerText;
+    var countryFullName = document.getElementById("countryFullName").innerText;
+    var leaderName = document.getElementById("leaderName").innerText;
+    var signature = document.getElementById("signature").innerText;
 
-    <button onclick="generateAndSaveImage()">Generate‎ and‎ Save</button>
+    // Replace placeholders with user input
+    document.getElementById("countryName").innerText = countryName;
+    document.getElementById("date").innerText = date;
+    document.getElementById("countryFullName").innerText = countryFullName;
+    document.getElementById("leaderName").innerText = leaderName;
+    document.getElementById("signature").innerText = signature;
 
-    <div id="output"></div>
-  </div>
+    // Use html2canvas to convert the content to a canvas
+    html2canvas(document.getElementById("document-container")).then(function(canvas) {
+      // Convert canvas to PNG and trigger download
+      var link = document.createElement("a");
+      link.href = canvas.toDataURL();
+      link.download = "document.png";
+      link.click();
+    });
+  }
+</script>
 
-  <script>
-    function generateAndSaveImage() {
-      const countryName = document.getElementById('countryName').value || '__________';
-      const date = document.getElementById('date').value || '__/__/__';
-      const countryFullName = document.getElementById('countryFullName').value || 'The Democratic Republic of ________';
-      const leaderName = document.getElementById('leaderName').value || '__________';
-
-      const deedText = `Deed to ${countryName}\n\nThis deed hereby states that on the day of ${date}, ${countryFullName} is a free and independent nation run by its leaders under their own vision of what the ideal society should display. This deed expires the day that the last citizen ceases to be or the nation is disbanded by itself or a foreign entity. The leader of this new nation, ${leaderName}, will do their very best to bring prosperity and peace to all people within.\n\nSigned and Confirmed, ______________`;
-
-      document.getElementById('output').innerText = deedText;
-
-      // You can use a library like html2canvas to convert the content to an image and save it as PNG.
-      // See https://html2canvas.hertzen.com/ for details.
-    }
-  </script>
 </body>
 </html>
-
