@@ -59,8 +59,7 @@ body {
 #container {
     text-align: center;
     z-index: 1;
-    margin-top: 120px; /* Adjusted top margin for content */
-}
+    margin-top: 70px; /* Adjusted top margin for content to make space for the fixed navbar */
 
         h1,
         p {
@@ -116,6 +115,11 @@ body {
             position: fixed;
             width: 100%;
             z-index: 10000;
+            position: fixed; /* Set position to fixed */
+    width: 100%;
+    z-index: 10000;
+    top: 0; /* Position at the top of the page */
+
         }
 
 #navbar img {
