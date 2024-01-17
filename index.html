@@ -14,9 +14,6 @@
     <style>
         body {
             margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
             background: url('https://media.discordapp.net/attachments/1056993081498554430/1192256381806456873/3663141F-2A10-41D7-B850-556E499296C5.png?ex=65a86a48&is=6595f548&hm=46aa68b4142a51ab8a8ebba7dc13c2cf3dbe1dcb08438446986ad945f3bcca77&=&format=webp&quality=lossless&width=1202&height=676') no-repeat center center fixed;
             background-size: cover;
             color: #FFFFFF;
@@ -24,17 +21,18 @@
             transition: background 1s ease-in-out;
         }
 
-        html, body {
-    height: 100%;
-    margin: 0;
-}
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+        }
 
-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
 
         #loading-overlay {
             position: fixed;
@@ -56,10 +54,11 @@ body {
             height: 50px;
         }
 
-#container {
-    text-align: center;
-    z-index: 1;
-    margin-top: 70px; /* Adjusted top margin for content to make space for the fixed navbar */
+        #container {
+            text-align: center;
+            z-index: 1;
+            margin-top: 120px; /* Adjusted top margin for content */
+        }
 
         h1,
         p {
@@ -115,18 +114,14 @@ body {
             position: fixed;
             width: 100%;
             z-index: 10000;
-            position: fixed; /* Set position to fixed */
-    width: 100%;
-    z-index: 10000;
-    top: 0; /* Position at the top of the page */
-
+            top: 0; /* Fixed position from top */
         }
 
-#navbar img {
-    width: 30px;
-    height: 30px;
-    margin-left: 20px; /* Adjusted margin to move the image slightly to the right */
-}
+        #navbar img {
+            width: 30px;
+            height: 30px;
+            margin-left: 20px; /* Adjusted margin to move the image slightly to the right */
+        }
 
         #navbar a {
             color: #FFFFFF;
@@ -134,13 +129,18 @@ body {
             margin: 0 10px;
             font-weight: bold;
         }
+
+        #main-content {
+            margin-top: 70px; /* Adjusted margin for content to avoid overlap with fixed navbar */
+        }
     </style>
 </head>
 
 <body>
     <div id="loading-overlay">
-        <p>Loading, this may take up to 30 seconds ‎ ‎   ‎ </p>
-        <img src="https://cdn.discordapp.com/attachments/1056993081498554430/1192274745887031306/Rolling-1.1s-141px.gif?ex=65a87b62&is=65960662&hm=3696ccb9af7f820d4f358d5d60991fb5d267d640246adb2633cd1c989f8756b7" alt="Loading GIF">
+        <p>Loading, this may take up to 30 seconds ‎ ‎ ‎ </p>
+        <img src="https://cdn.discordapp.com/attachments/1056993081498554430/1192274745887031306/Rolling-1.1s-141px.gif?ex=65a87b62&is=65960662&hm=3696ccb9af7f820d4f358d5d60991fb5d267d640246adb2633cd1c989f8756b7"
+            alt="Loading GIF">
     </div>
     <div id="navbar">
         <img src="https://api.realmcenter.org/image/DJ-ZimaNations.png" alt="Zima Nations Icon">
@@ -149,14 +149,16 @@ body {
         <a href="https://discord.gg/fk6Vw7hJ7F">DISCORD</a>
         <a href="#">INVITE</a>
     </div>
-    <div id="container">
-        <h1>Welcome to Zima Nations</h1>
-        <p>A Bedrock Realm Based on War, Diplomacy, Trade, and Politics</p>
-        <a href="#" class="button" id="copy-invite">Copy Invite</a>
-        <a href="https://discord.gg/fk6Vw7hJ7F" class="button" id="join-now">Join Now</a>
-        <div><a href="https://realmcenter.github.io/map.html" class="button" id="view-map">View Map</a></div>
-        <div class="small-links-container">
-            <a href="https://www.youtube.com/watch?v=EbMP03jkX0s" class="small-link">Save as App</a>
+    <div id="main-content">
+        <div id="container">
+            <h1>Welcome to Zima Nations</h1>
+            <p>A Bedrock Realm Based on War, Diplomacy, Trade, and Politics</p>
+            <a href="#" class="button" id="copy-invite">Copy Invite</a>
+            <a href="https://discord.gg/fk6Vw7hJ7F" class="button" id="join-now">Join Now</a>
+            <div><a href="https://realmcenter.github.io/map.html" class="button" id="view-map">View Map</a></div>
+            <div class="small-links-container">
+                <a href="https://www.youtube.com/watch?v=EbMP03jkX0s" class="small-link">Save as App</a>
+            </div>
         </div>
     </div>
     <script>
