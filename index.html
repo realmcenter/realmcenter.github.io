@@ -13,17 +13,17 @@
     <title>Zima App</title>
     <style>
         body {
-            margin: -50px 0 0 0;
-            padding-top: 0px;
+            margin: 0;
+            padding-top: 80px; /* Adjusted top padding for navbar */
             display: flex;
             align-items: center;
             justify-content: center;
             height: 100vh;
             background: url('https://media.discordapp.net/attachments/1056993081498554430/1192256381806456873/3663141F-2A10-41D7-B850-556E499296C5.png?ex=65a86a48&is=6595f548&hm=46aa68b4142a51ab8a8ebba7dc13c2cf3dbe1dcb08438446986ad945f3bcca77&=&format=webp&quality=lossless&width=1202&height=676') no-repeat center center fixed;
             background-size: cover;
-            color: #FFFFFF; /* White text */
+            color: #FFFFFF;
             font-family: 'Arial', sans-serif;
-            transition: background 1s ease-in-out; /* Add transition for smooth fading */
+            transition: background 1s ease-in-out;
         }
 
         #loading-overlay {
@@ -42,8 +42,8 @@
         }
 
         #loading-overlay img {
-            width: 50px; /* Adjust the width as needed */
-            height: 50px; /* Adjust the height as needed */
+            width: 50px;
+            height: 50px;
         }
 
         #container {
@@ -67,49 +67,36 @@
         }
 
         #view-map {
-            background-color: #FF0000; /* White button */
-            color: #FFFFFF; /* Red text */
+            background-color: #FF0000;
+            color: #FFFFFF;
         }
 
         #join-now {
-            background-color: #FFFFFF; /* Red button */
-            color: #FF0000; /* White text */
+            background-color: #FFFFFF;
+            color: #FF0000;
         }
 
         #copy-invite,
         .small-link {
-            color: #FFFFFF; /* White text */
+            color: #FFFFFF;
         }
 
         #copy-invite {
-            background-color: #FFFFFF; /* White button */
-            color: #FF0000; /* Red text */
+            background-color: #FFFFFF;
+            color: #FF0000;
         }
 
- @media only screen and (max-width: 600px) {
-                        h1 {
+        @media only screen and (max-width: 600px) {
+            h1 {
                 font-size: 24px;
             }
 
             p {
                 font-size: 14px;
             }
-            #navbar {
-                flex-direction: column;
-                padding: 10px;
-                text-align: center;
-            }
-
-            #navbar img {
-                margin-bottom: 10px;
-            }
-
-            #navbar a {
-                margin: 5px 0;
-            }
 
             body {
-                margin-top: 80px; /* Adjusted margin for smaller screens */
+                margin-top: 80px;
             }
         }
 
@@ -195,30 +182,17 @@
     </script>
     
 
-<script>
-    document.getElementById('copy-invite').addEventListener('click', function () {
-        // Create a temporary input element
-        var tempInput = document.createElement('input');
-
-        // Set the input value to the invite link
-        tempInput.value = 'https://realmcenter.github.io/invite.html';
-
-        // Append the input element to the document
-        document.body.appendChild(tempInput);
-
-        // Select the input content
-        tempInput.select();
-
-        // Execute the copy command
-        document.execCommand('copy');
-
-        // Remove the temporary input element
-        document.body.removeChild(tempInput);
-
-        // Alert the user that the link is copied (you can customize this part)
-        alert('Success! Go to Discord and paste the link to share.');
-    });
-</script>
+    <script>
+        document.getElementById('copy-invite').addEventListener('click', function () {
+            var tempInput = document.createElement('input');
+            tempInput.value = 'https://realmcenter.github.io/invite.html';
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            alert('Success! Go to Discord and paste the link to share.');
+        });
+    </script>
 </body>
 
 </html>
