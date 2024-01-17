@@ -24,6 +24,18 @@
             transition: background 1s ease-in-out;
         }
 
+        html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
         #loading-overlay {
             position: fixed;
             top: 0;
@@ -44,11 +56,11 @@
             height: 50px;
         }
 
-        #container {
-            text-align: center;
-            z-index: 1;
-            margin-top: 80px; /* Adjusted top margin for content */
-        }
+#container {
+    text-align: center;
+    z-index: 1;
+    margin-top: 120px; /* Adjusted top margin for content */
+}
 
         h1,
         p {
@@ -106,11 +118,11 @@
             z-index: 10000;
         }
 
-        #navbar img {
-            width: 30px;
-            height: 30px;
-            margin-right: 10px;
-        }
+#navbar img {
+    width: 30px;
+    height: 30px;
+    margin-left: 20px; /* Adjusted margin to move the image slightly to the right */
+}
 
         #navbar a {
             color: #FFFFFF;
