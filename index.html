@@ -13,8 +13,8 @@
     <title>Zima App</title>
     <style>
         body {
-            margin: 0;
-            padding: 0;
+            margin: 50px 0 0 0;
+            padding-top: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -86,23 +86,34 @@
             color: #FF0000; /* Red text */
         }
 
-        @media only screen and (max-width: 600px) {
-            h1 {
+ @media only screen and (max-width: 600px) {
+                        h1 {
                 font-size: 24px;
             }
 
             p {
                 font-size: 14px;
             }
+            #navbar {
+                flex-direction: column;
+                padding: 10px;
+                text-align: center;
+            }
 
-            .button {
-                font-size: 16px;
-                padding: 10px 20px;
-                margin: 5px;
+            #navbar img {
+                margin-bottom: 10px;
+            }
+
+            #navbar a {
+                margin: 5px 0;
+            }
+
+            body {
+                margin-top: 80px; /* Adjusted margin for smaller screens */
             }
         }
 
-         #navbar {
+        #navbar {
             background-color: #FF0000;
             display: flex;
             align-items: center;
