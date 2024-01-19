@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Covered+By+Your+Grace&display=swap">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zima Nations</title>
+    <style>
+ body {
+            font-family: 'Arial', sans-serif;
+            background-color: #000000;
+            color: #e74c3c;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #app {
+            background-color: #c0392b;
+            color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            width: 400px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+    #app {
+        /* other styles remain unchanged */
+        background-color: #c0392b;
+        color: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        width: 400px;
+        text-align: center;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+        h1, h2 {
+            color: #fff;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0;
+            color: #fff;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            box-sizing: border-box;
+            border: 1px solid #fff;
+            border-radius: 5px;
+            background-color: #e74c3c;
+            color: #fff;
+        }
+
+        button {
+            background-color: #e74c3c;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #c0392b;
+        }
+
+        #countryInfo {
+            margin-top: 20px;
+            background-color: #c0392b;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        img {
+            max-width: 100%;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        p {
+            font-family: 'Arial', cursive;
+        }
+
+        a {
+    color: #fff;
+}
+
+    </style>
+</head>
+<body>
+    <div id="app">
+        <section id="start">
+            <h1>Zima Nations</h1>
+            <label for="shortName">Short Name of Your Nation (e.g., France): </label>
+            <input type="text" id="shortName">
+
+            <label for="longName">Longer Version of the Name (e.g., Republic of France): </label>
+            <input type="text" id="longName">
+
+            <label for="ideology">Pick an Ideology: </label>
+            <select id="ideology">
+                <option value="democracy">Democracy - Rule by the majority.</option>
+                <option value="communism">Communism - Your property is your neighbors property.</option>
+                <option value="monarchism">Monarchism - Rule by a crown.</option>
+                <option value="conservatism">Conservatism - Values and morals first.</option>
+                <option value="fascism">Fascism - Our people are superior.</option>
+                <option value="socialism">Socialism - Absolute Equality.</option>
+                <option value="nationalism">Nationalism - Our nation first.</option>
+                <option value="liberalism">Liberalism - Consent of the governed.</option>
+                <option value="anarchism">Anarchism - The absence of government.</option>
+                <option value="theocracy">Theocracy - The rule by a gods teachings.</option>
+                <option value="imperialism">Imperialism - We must conquer all.</option>
+                <option value="republicanism">Republicanism - Rights for the quiet voices.</option>
+                <option value="confederation">Confederation - Smaller nations under one flag.</option>
+                <option value="militarism">Militarism - Our defense comes first.</option>
+                <option value="authoritarianism">Authoritarianism - Bad opinions should be suppressed.</option>
+                <option value="corporatism">Corporatism - Corporations run the government.</option>
+                <option value="oligarchy">Oligarchy - Rule by a small group.</option>
+                <option value="elitism">Elitism - Rule by a the rich and powerful.</option>
+                <!-- Add more ideologies as needed -->
+            </select>
+
+            <label for="flagUpload">Create a Flag <a href="https://tennessine.co.uk/flags/" target="_blank">here</a> and upload it: </label>
+            <input type="file" id="flagUpload">
+
+            <label for="leaderName">Leader's Name: </label>
+            <input type="text" id="leaderName">
+
+            <label for="citizen1">Citizen 1: </label>
+            <input type="text" id="citizen1">
+
+            <label for="citizen2">Citizen 2: </label>
+            <input type="text" id="citizen2">
+
+            <button onclick="generateInfo()">Generate Country Info</button>
+        </section>
+
+        <section id="countryInfo">
+            <!-- Display the generated country info here -->
+        </section>
+    </div>
+
+    <script>
+function generateInfo() {
+    const shortName = document.getElementById('shortName').value;
+    const longName = document.getElementById('longName').value;
+    const ideology = document.getElementById('ideology').value;
+    const flagUpload = document.getElementById('flagUpload');
+    const leaderName = document.getElementById('leaderName').value;
+    const citizen1 = document.getElementById('citizen1').value;
+    const citizen2 = document.getElementById('citizen2').value;
+
+    const currentDate = new Date().toLocaleDateString();
+
+    const countryInfo = `
+        <p>${longName}</p>
+            <p>On this day of ${currentDate}, ${shortName} has been formed. This nation's leader, ${leaderName}, along with ${citizen1}, ${citizen2}, and possibly many others agree to hold the values of ${ideology} while helping their citizens and nation achieve greatness on Zima Nations. You may now screenshot this, sent it in the create-a-nation channel, and get it approved or denied by an admin. If you are interested, you can create a deed for your nation <a href=https://realmcenter.github.io/nation-generator.html"">here</a></p>
+        <img src="${flagUpload.files[0] ? URL.createObjectURL(flagUpload.files[0]) : ''}" alt="Flag of ${longName}">
+    `;
+
+    document.getElementById('countryInfo').innerHTML = countryInfo;
+}
+
+    </script>
+</body>
+</html>
