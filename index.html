@@ -51,23 +51,27 @@
         const loadingVideo = document.getElementById('loadingVideo');
         const contentDiv = document.getElementById('content');
 
-        loadingVideo.addEventListener('loadeddata', function() {
-            setTimeout(function() {
-                loadingVideo.pause();
-                loadingVideo.style.display = 'none';
-                contentDiv.style.display = 'block';
+        // Redirect immediately for small screens
+        if (window.innerWidth <= 768) {
+            window.location.replace('/home.html');
+        } else {
+            // For PC screens, continue with the loading logic
+            loadingVideo.addEventListener('loadeddata', function() {
                 setTimeout(function() {
-                    document.body.style.backgroundColor = 'white';
-                    contentDiv.style.opacity = 1;
+                    loadingVideo.pause();
+                    loadingVideo.style.display = 'none';
+                    contentDiv.style.display = 'block';
                     setTimeout(function() {
-                        // Redirect to /index.html after 9.6 seconds
-                        window.location.replace('/index.html');
+                        document.body.style.backgroundColor = 'white';
+                        contentDiv.style.opacity = 1;
+                        setTimeout(function() {
+                            // Redirect to /home.html after 9.6 seconds
+                            window.location.replace('/home.html');
+                        }, 100); // 0.1 seconds
                     }, 100); // 0.1 seconds
-                }, 100); // 0.1 seconds
-            }, 9600); // 9.6 seconds
-        });
+                }, 9600); // 9.6 seconds
+            });
+        }
     </script>
 </body>
-</html>
-
 </html>
