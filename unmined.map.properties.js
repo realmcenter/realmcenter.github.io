@@ -4,11 +4,11 @@ var UnminedMapProperties = {
     maxZoom: 2,
     defaultZoom: 0,
     imageFormat: "jpeg",
-    minRegionX: -10,
+    minRegionX: -21,
     minRegionZ: 0,
     maxRegionX: -1,
     maxRegionZ: 9,
-    worldName: "Zima Nations - Copy",
+    worldName: "Zima Nations",
     background: "#041f5f",
     markers: new Array()
 }

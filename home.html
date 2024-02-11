@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Website</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh; /* Set a minimum height to ensure full viewport coverage */
+            background-size: cover;
+            background-position: center;
+            animation: backgroundAnimation 15s infinite;
+        }
+
+        @keyframes backgroundAnimation {
+            0% { background-image: url('https://media.discordapp.net/attachments/1056993081498554430/1192256381806456873/3663141F-2A10-41D7-B850-556E499296C5.png?ex=65a86a48&is=6595f548&hm=46aa68b4142a51ab8a8ebba7dc13c2cf3dbe1dcb08438446986ad945f3bcca77&=&format=webp&quality=lossless&width=1202&height=676'); }
+            33% { background-image: url('https://media.discordapp.net/attachments/1056993081498554430/1192256382406230076/D93551C4-E38B-4C73-AE57-116117A5973E.png?ex=65a86a48&is=6595f548&hm=0d54bbebf2c221728e6716d2e306e7c138f133f35138a358da6553531c284639&=&format=webp&quality=lossless&width=1202&height=676'); }
+            66% { background-image: url('https://media.discordapp.net/attachments/1056993081498554430/1192256382955696288/2EAAB4D1-97AF-45DC-84E8-83B89B8B9DBA.png?ex=65a86a48&is=6595f548&hm=bee41379847372af2ebe5ec4ad9029cedb7a4958907b6540837fbf8a69ea00d1&=&format=webp&quality=lossless&width=1202&height=676'); }
+            100% { background-image: url('https://media.discordapp.net/attachments/1056993081498554430/1192256381806456873/3663141F-2A10-41D7-B850-556E499296C5.png?ex=65a86a48&is=6595f548&hm=46aa68b4142a51ab8a8ebba7dc13c2cf3dbe1dcb08438446986ad945f3bcca77&=&format=webp&quality=lossless&width=1202&height=676'); }
+        }
+
+        #container {
+            text-align: center;
+            max-width: 80%; /* Limit content width for better readability on smaller screens */
+            margin: 0 auto; /* Center the container horizontally */
+        }
+
+        #logo {
+            max-width: 50%; /* Make the logo responsive */
+            height: auto;
+            margin-top: 20px; /* Adjust spacing */
+        }
+
+        #buttons {
+            margin-top: 20px;
+        }
+
+        .button {
+    width: 50%;
+    max-width: 250px;
+    display: block;
+    margin: 10px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    background-color: rgba(255, 0, 0, 0.3); /* Set the alpha channel to control transparency */
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: rgba(204, 0, 0, 1); /* Adjust the alpha channel for the hover state */
+}
+
+    </style>
+</head>
+<body>
+    <div id="container">
+        <img id="logo" src="https://media.discordapp.net/attachments/1056993081498554430/1206125500641050684/IMG_3789.png?ex=65dadee8&is=65c869e8&hm=1265c86817a0e3225b732398b7e1af41194adcfd56e189b97a2bb595cb9015b4&=&format=webp&quality=lossless" alt="Your Logo">
+        <div id="buttons">
+            <a href="/map.html" class="button">MAP</a>
+            <a href="/wiki.html" class="button">GUIDES</a>
+            <a href="https://discord.gg/cQgB8CN43f" class="button">DISCORD</a>
+            <a href="https://c8.alamy.com/comp/WXYW7Y/coming-soon-comic-cartoon-style-title-on-red-circle-background-old-cinema-movie-round-promotion-announcement-screen-vector-retro-scene-advertising-poster-template-illustration-WXYW7Y.jpg" class="button">SHOP</a>
+            <a href="https://www.youtube.com/watch?v=EbMP03jkX0s" class="button">DOWNLOAD APP</a>
+        </div>
+    </div>
+</body>
+</html>

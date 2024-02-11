@@ -1,210 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="apple-touch-icon" href="https://api.realmcenter.org/image/DJ-ZimaNations.png" />
-    <link rel="apple-touch-icon" sizes="72x72" href="https://api.realmcenter.org/image/DJ-ZimaNations.png" />
-    <link rel="apple-touch-icon" sizes="114x114" href="https://api.realmcenter.org/image/DJ-ZimaNations.png" />
-    <link rel="icon" type="image/x-icon" href="https://api.realmcenter.org/image/DJ-ZimaNations.png">
-    <title>Zima App</title>
+    <title>Loading Screen</title>
     <style>
         body {
             margin: 0;
-            background: url('https://media.discordapp.net/attachments/1056993081498554430/1192256381806456873/3663141F-2A10-41D7-B850-556E499296C5.png?ex=65a86a48&is=6595f548&hm=46aa68b4142a51ab8a8ebba7dc13c2cf3dbe1dcb08438446986ad945f3bcca77&=&format=webp&quality=lossless&width=1202&height=676') no-repeat center center fixed;
-            background-size: cover;
-            color: #FFFFFF;
-            font-family: 'Arial', sans-serif;
-            transition: background 1s ease-in-out;
+            overflow: hidden;
+            background-color: #b71b1c;
+            transition: background-color 1s ease;
         }
 
-        html,
-        body {
-            height: 100%;
-            margin: 0;
-        }
-
-        body {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        #loading-overlay {
+        video {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: black;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 20px;
-            z-index: 9999;
-        }
-
-        #loading-overlay img {
-            width: 50px;
-            height: 50px;
-        }
-
-        #container {
-            text-align: center;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
             z-index: 1;
-            margin-top: 120px; /* Adjusted top margin for content */
         }
 
-        h1,
+        #content {
+            display: none;
+            z-index: 2;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
         p {
-            margin-bottom: 20px;
-        }
-
-        .button {
-            display: inline-block;
-            padding: 15px 30px;
-            font-size: 18px;
-            text-decoration: none;
-            margin: 10px;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-        #view-map {
-            background-color: #FF0000;
-            color: #FFFFFF;
-        }
-
-        #join-now {
-            background-color: #FFFFFF;
-            color: #FF0000;
-        }
-
-        #copy-invite,
-        .small-link {
-            color: #FFFFFF;
-        }
-
-        #copy-invite {
-            background-color: #FFFFFF;
-            color: #FF0000;
-        }
-
-        @media only screen and (max-width: 600px) {
-            h1 {
-                font-size: 24px;
-            }
-
-            p {
-                font-size: 14px;
-            }
-        }
-
-        #navbar {
-            background-color: #FF0000;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px;
-            position: fixed;
-            width: 100%;
-            z-index: 10000;
-            top: 0; /* Fixed position from top */
-        }
-
-        #navbar img {
-            width: 30px;
-            height: 30px;
-            margin-left: 20px; /* Adjusted margin to move the image slightly to the right */
-        }
-
-        #navbar a {
-            color: #FFFFFF;
-            text-decoration: none;
-            margin: 0 10px;
-            font-weight: bold;
-        }
-
-        #main-content {
-            margin-top: 70px; /* Adjusted margin for content to avoid overlap with fixed navbar */
+            color: white;
+            font-size: 24px;
+            text-align: center;
+            margin-top: 50%;
         }
     </style>
 </head>
-
 <body>
-    <div id="loading-overlay">
-        <p>Loading, this may take up to 30 seconds ‎ ‎ ‎ </p>
-        <img src="https://cdn.discordapp.com/attachments/1056993081498554430/1192274745887031306/Rolling-1.1s-141px.gif?ex=65a87b62&is=65960662&hm=3696ccb9af7f820d4f358d5d60991fb5d267d640246adb2633cd1c989f8756b7"
-            alt="Loading GIF">
+    <video id="loadingVideo" autoplay muted loop>
+        <source src="https://cdn.discordapp.com/attachments/1056993081498554430/1206114818126516255/copy_A1AF32EF-0683-4D82-8A2F-3E129EDFE734_1.mp4?ex=65dad4f5&is=65c85ff5&hm=d0f4a619eb9721e2850e7825bf9f067b3982414414dd6147c143e57ca00befa5" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div id="content">
+        <p>Loading the rest of the page...</p>
     </div>
-    <div id="navbar">
-        <img src="https://api.realmcenter.org/image/DJ-ZimaNations.png" alt="Zima Nations Icon">
-        <a href="map.html">MAP</a>
-        <a href="/wiki.html">WIKI</a>
-        <a href="https://discord.gg/fk6Vw7hJ7F">DISCORD</a>
-        <a href="https://discord.gg/Bx9xtv3yrd">SHOP (Coming Soon)</a>
-    </div>
-    <div id="main-content">
-        <div id="container">
-            <h1>Welcome to Zima Nations</h1>
-            <p>A Bedrock Realm Based on War, Diplomacy, Trade, and Politics</p>
-            <a href="#" class="button" id="copy-invite">Copy Invite</a>
-            <a href="https://discord.gg/fk6Vw7hJ7F" class="button" id="join-now">Join Now</a>
-            <div><a href="https://realmcenter.github.io/map.html" class="button" id="view-map">View Map</a></div>
-            <div class="small-links-container">
-                <a href="https://www.youtube.com/watch?v=EbMP03jkX0s" class="small-link">Save as App</a>
-            </div>
-        </div>
-    </div>
-    <script>
-        var backgrounds = [
-            'https://media.discordapp.net/attachments/1056993081498554430/1192256381806456873/3663141F-2A10-41D7-B850-556E499296C5.png?ex=65a86a48&is=6595f548&hm=46aa68b4142a51ab8a8ebba7dc13c2cf3dbe1dcb08438446986ad945f3bcca77&=&format=webp&quality=lossless&width=1202&height=676',
-            'https://media.discordapp.net/attachments/1056993081498554430/1192256382406230076/D93551C4-E38B-4C73-AE57-116117A5973E.png?ex=65a86a48&is=6595f548&hm=0d54bbebf2c221728e6716d2e306e7c138f133f35138a358da6553531c284639&=&format=webp&quality=lossless&width=1202&height=676',
-            'https://media.discordapp.net/attachments/1056993081498554430/1192256382955696288/2EAAB4D1-97AF-45DC-84E8-83B89B8B9DBA.png?ex=65a86a48&is=6595f548&hm=bee41379847372af2ebe5ec4ad9029cedb7a4958907b6540837fbf8a69ea00d1&=&format=webp&quality=lossless&width=1202&height=676'
-        ];
-    
-        var currentBackgroundIndex = 0;
-    
-        function preloadImages() {
-            for (var i = 0; i < backgrounds.length; i++) {
-                var img = new Image();
-                img.src = backgrounds[i];
-            }
-        }
-    
-        function changeBackground() {
-            document.body.style.backgroundImage = 'url(' + backgrounds[currentBackgroundIndex] + ')';
-            currentBackgroundIndex = (currentBackgroundIndex + 1) % backgrounds.length;
-        }
-    
-        // Preload images when the script is loaded
-        preloadImages();
-    
-        setInterval(changeBackground, 10000); // Change background every 30 seconds
-    
-        // Hide loading overlay after 10 seconds
-        setTimeout(function () {
-            document.getElementById("loading-overlay").style.display = "none";
-        }, 1000);
-    </script>
-    
 
     <script>
-        document.getElementById('copy-invite').addEventListener('click', function () {
-            var tempInput = document.createElement('input');
-            tempInput.value = 'https://realmcenter.github.io/invite.html';
-            document.body.appendChild(tempInput);
-            tempInput.select();
-            document.execCommand('copy');
-            document.body.removeChild(tempInput);
-            alert('Success! Go to Discord and paste the link to share.');
+        const loadingVideo = document.getElementById('loadingVideo');
+        const contentDiv = document.getElementById('content');
+
+        loadingVideo.addEventListener('loadeddata', function() {
+            setTimeout(function() {
+                loadingVideo.pause();
+                loadingVideo.style.display = 'none';
+                contentDiv.style.display = 'block';
+                setTimeout(function() {
+                    document.body.style.backgroundColor = 'white';
+                    contentDiv.style.opacity = 1;
+                    setTimeout(function() {
+                        // Redirect to /index.html after 9.6 seconds
+                        window.location.replace('/home.html');
+                    }, 100); // 0.1 seconds
+                }, 100); // 0.1 seconds
+            }, 9600); // 9.6 seconds
         });
     </script>
 </body>
-
 </html>
