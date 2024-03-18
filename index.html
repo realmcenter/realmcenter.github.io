@@ -1,77 +1,467 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loading Screen</title>
-    <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-            background-color: #b71b1c;
-            transition: background-color 1s ease;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zima Nations Dashboard</title>
+  <style>
 
-        video {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            object-fit: cover;
-            z-index: 1;
-        }
+body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #161616;
+      color: #fff;
+      /* Include background image properties */
+      background-image: url("your-default-image.jpg"); /* Default background image */
+      background-size: cover;
+      background-position: center;
+    }
 
-        #content {
-            display: none;
-            z-index: 2;
-            opacity: 0;
-            transition: opacity 1s ease;
-        }
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #333;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
 
-        p {
-            color: white;
-            font-size: 24px;
-            text-align: center;
-            margin-top: 50%;
-        }
-    </style>
+    .menu-circle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      background-color: #f83d3d;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Style for the menu icon inside the circle */
+    .menu-icon {
+      color: white;
+      font-size: 24px;
+    }
+
+    /* Styling for the popup menu */
+    .popup-menu {
+      position: fixed;
+      bottom: 90px; /* Adjust based on menu circle size */
+      right: 30px; /* Adjust based on menu circle size */
+      background-color: #333;
+      padding: 20px;
+      border-radius: 5px;
+      display: none;
+      z-index: 1000; /* Ensure it's above other content */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .popup-menu label {
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .popup-menu input[type="color"],
+    .popup-menu input[type="file"],
+    .popup-menu button {
+      margin-bottom: 10px;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      font-size: 16px;
+      background-color: #ce3131;
+      color: #fff;
+      transition: background-color 0.3s;
+    }
+
+    .popup-menu input[type="color"]:hover,
+    .popup-menu input[type="file"]:hover,
+    .popup-menu button:hover {
+      background-color: #6d0000;
+    }
+
+    .popup-menu input[type="color"],
+    .popup-menu input[type="file"] {
+      display: block;
+    }
+
+    .popup-menu button.clear-btn {
+      background-color: #333;
+      color: #fff;
+    }
+    h1 {
+      text-align: center;
+      color: #f83d3d;
+      text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    .server-icon {
+      text-align: center;
+    }
+
+    .server-icon img {
+      width: 80px; /* Adjusted icon size */
+      height: 80px;
+      display: block;
+      margin: 0 auto;
+      margin-bottom: 20px;
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+      margin: 0 auto; /* Center dropdown button */
+    }
+
+    .dropbtn {
+      background-color: #ce3131;
+      color: white;
+      padding: 16px;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #1f1f1f;
+      min-width: 160px;
+      z-index: 1;
+      border-radius: 5px;
+    }
+
+    .dropdown-content a {
+      color: white;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #555;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .dropdown:hover .dropbtn {
+      background-color: #6d0000;
+    }
+
+    .server-status {
+      text-align: center;
+      padding: 10px;
+      background-color: #555;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+
+    .server-status.online {
+      background-color: #4caf50;
+    }
+
+    .server-status.offline {
+      background-color: #f44336;
+    }
+
+    .server-commands {
+      text-align: center;
+    }
+
+    .icon {
+      display: inline-block;
+      width: 100px;
+      text-align: center;
+      margin: 10px; /* Slightly higher top margin */
+      border-radius: 10px; /* Rounded corners */
+    }
+
+ /* Add these styles to the existing CSS */
+
+.server-info {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.server-info p {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+.server-info p:first-child {
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.server-info p span {
+  color: #ce3131;
+}
+
+.server-info p em {
+  font-style: italic;
+}
+
+.server-status p {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+.server-status p:first-child {
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.server-status.online {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+.server-status.offline {
+  background-color: #f44336;
+  color: #fff;
+}
+
+.server-status p.players {
+  margin-top: 10px;
+}
+
+.server-status p.players span {
+  color: #ce3131;
+}
+
+.server-commands {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.icon {
+  width: 120px;
+  text-align: center;
+  margin: 10px;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.icon:hover {
+  transform: scale(1.05);
+}
+
+.icon img {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
+
+.icon p {
+  font-size: 14px;
+}
+
+.icon a {
+  text-decoration: none; /* Remove underline */
+  font-weight: bold; /* Make text bold */
+  color: #fff;
+}
+
+
+
+
+    /* Animation for icons */
+    .icon:hover {
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        background-color: #ce3131;
+      }
+      50% {
+        background-color: #f83d3d;
+      }
+      100% {
+        background-color: #ce3131;
+      }
+    }
+
+    @media only screen and (max-width: 600px) {
+      .container {
+        width: 90%;
+      }
+      .icon {
+        width: 80px;
+      }
+      .icon img {
+        width: 60px;
+        height: 60px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <video id="loadingVideo" autoplay muted loop>
-        <source src="https://cdn.discordapp.com/attachments/1056993081498554430/1206114818126516255/copy_A1AF32EF-0683-4D82-8A2F-3E129EDFE734_1.mp4?ex=65dad4f5&is=65c85ff5&hm=d0f4a619eb9721e2850e7825bf9f067b3982414414dd6147c143e57ca00befa5" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-
-    <div id="content">
-        <p>Loading the rest of the page...</p>
+  <div class="container">
+    <h1>Zima Nations Dashboard</h1>
+    <div class="server-icon">
+      <img src="" alt="Server Icon" id="server-icon"> <!-- Server icon displayed here -->
     </div>
-
-    <script>
-        const loadingVideo = document.getElementById('loadingVideo');
-        const contentDiv = document.getElementById('content');
-
-        // Redirect immediately for small screens
-        if (window.innerWidth <= 768) {
-            window.location.replace('/home.html');
-        } else {
-            // For PC screens, continue with the loading logic
-            loadingVideo.addEventListener('loadeddata', function() {
-                setTimeout(function() {
-                    loadingVideo.pause();
-                    loadingVideo.style.display = 'none';
-                    contentDiv.style.display = 'block';
-                    setTimeout(function() {
-                        document.body.style.backgroundColor = 'white';
-                        contentDiv.style.opacity = 1;
-                        setTimeout(function() {
-                            // Redirect to /home.html after 9.6 seconds
-                            window.location.replace('/home.html');
-                        }, 100); // 0.1 seconds
-                    }, 100); // 0.1 seconds
-                }, 9600); // 9.6 seconds
-            });
-        }
-    </script>
+    <div class="server-info">
+      <div class="dropdown">
+        <button class="dropbtn">Join Server</button>
+        <div class="dropdown-content">
+          <a href="#">Java IP: <br>51.81.49.218:25681</a>
+          <a href="#">Bedrock IP: <br>51.81.49.218 (6761)</a>
+          <a href="#">Bedrock Console: <br>Add "Realmcenter8730" via the Minecraft Friends Tab, Restart your game, Return to your friends tab and scroll down until you see Zima Nations in "Joinable Games"</a>
+        </div>
+      </div>
+    </div>
+    <div class="server-status" id="server-status">
+      <!-- Server status will be displayed here -->
+    </div>
+    <div class="server-commands">
+      <div class="icon">
+        <a href="http://zimanations.ddns.net:6458/ ">
+          <img src="https://png.pngtree.com/png-clipart/20191120/original/pngtree-maps-icon-vectors-png-image_5053747.jpg" alt="Map Icon">
+          <p>Map</p>
+        </a>
+      </div>
+      <div class="icon">
+        <a href="https://discord.gg/ZQjMQvMa4Z">
+          <img src="https://i.pinimg.com/originals/cc/6a/f2/cc6af2b47a62e61e1154a4726299ba46.jpg" alt="Under Construction Icon">
+          <p>Discord</p>
+        </a>
+      </div>
+      <div class="icon">
+        <a href="https://zima-nations.fandom.com/">
+          <img src="https://images.assetsdelivery.com/compings_v2/hartgraphic/hartgraphic2003/hartgraphic200300010.jpg" alt="Under Construction Icon">
+          <p>Wiki</p>
+        </a>
+      </div>
+      <div class="icon">
+        <a href="/nation-create">
+          <img src="https://static.vecteezy.com/system/resources/previews/024/766/720/non_2x/museum-location-black-glyph-ui-icon-historical-monument-find-place-on-map-user-interface-design-silhouette-symbol-on-white-space-solid-pictogram-for-web-mobile-isolated-illustration-vector.jpg" alt="Under Construction Icon">
+          <p>Country Builder</p>
+        </a>
+      </div>
+      <div class="icon">
+        <a href="https://tennessine.co.uk/flags/">
+          <img src="https://images.rawpixel.com/image_social_square/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvdjM4MS1uLTA1MS1zaGllbGRpZGVhXzIuanBn.jpg" alt="Under Construction Icon">
+          <p>Flag Maker</p>
+        </a>
+      </div>
+      <div class="icon">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeRprHeQTuVAt1itHyxcplYE7haPHpeZ8fLq3-fWbOTlbxAsQ/viewform">
+          <img src="https://media.istockphoto.com/id/855823788/vector/auction-or-judge-gavel-icon-black-minimalist-icon-isolated-on-white-background.jpg?s=612x612&w=0&k=20&c=7FyuaN2he-QIJJGNWICQnLeAlX_TYoftFiXbp9fXqc4=" alt="Under Construction Icon">
+          <p>Appeal Ban</p>
+        </a>
+      </div>
+    </div>
+    
+  </div>
+  <div class="menu-circle" id="menu-circle">
+    <div class="menu-icon">&#9881;</div> <!-- Unicode for gear icon -->
+  </div>
+  <div class="popup-menu" id="popup-menu">
+    <label for="color-picker">Choose Background Color:</label><br>
+    <input type="color" id="color-picker"><br>
+    <label for="image-picker">Upload Background Image:</label><br>
+    <input type="file" id="image-picker"><br>
+    <button class="clear-btn" onclick="clearBackgroundImage()">Clear Background Image</button><br>
+    <button onclick="closePopup()">Close</button>
+  </div>
 </body>
+<script>
+      function openPopup() {
+      document.getElementById('popup-menu').style.display = 'block';
+    }
+
+    // Function to handle closing the popup menu
+    function closePopup() {
+      document.getElementById('popup-menu').style.display = 'none';
+    }
+
+    // Function to clear the background image
+    function clearBackgroundImage() {
+      document.body.style.backgroundImage = 'none';
+      localStorage.removeItem('backgroundImage');
+    }
+  // Function to handle opening the popup menu
+  function openPopup() {
+    document.getElementById('popup-menu').style.display = 'block';
+  }
+
+  // Function to handle closing the popup menu
+  function closePopup() {
+    document.getElementById('popup-menu').style.display = 'none';
+  }
+
+  // Event listener for clicking on the menu circle to open the popup menu
+  document.getElementById('menu-circle').addEventListener('click', openPopup);
+
+  // Event listener for changing the background color
+  document.getElementById('color-picker').addEventListener('change', function() {
+    document.body.style.backgroundColor = this.value;
+    // Store the selected color in local storage
+    localStorage.setItem('backgroundColor', this.value);
+  });
+
+  // Event listener for changing the background image
+  document.getElementById('image-picker').addEventListener('change', function() {
+    const file = this.files[0];
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      document.body.style.backgroundImage = `url(${e.target.result})`;
+      // Store the selected image in local storage
+      localStorage.setItem('backgroundImage', e.target.result);
+    }
+    reader.readAsDataURL(file);
+  });
+
+  // Function to load background color and image from local storage on page load
+  window.addEventListener('load', function() {
+    const storedColor = localStorage.getItem('backgroundColor');
+    const storedImage = localStorage.getItem('backgroundImage');
+    if (storedColor) {
+      document.body.style.backgroundColor = storedColor;
+    }
+    if (storedImage) {
+      document.body.style.backgroundImage = `url(${storedImage})`;
+    }
+  });
+</script>
+  <script>
+    // Fetch server status data from the API
+    fetch('https://api.mcstatus.io/v2/status/java/51.81.49.218:25681')
+      .then(response => response.json())
+      .then(data => {
+        // Display server status
+        const serverStatusElement = document.getElementById('server-status');
+        if (data.online) {
+          serverStatusElement.innerHTML = `
+            <p>Server Status: Online 🟢</p><br>
+            <p>Version: ${data.version.name_raw}</p><br>
+            <p>${data.motd.clean}</p><br>
+            <p>Players Online: <br>${data.players.list.map(player => player.name_clean).join(', <br>')}</p>
+          `;
+        } else {
+          serverStatusElement.innerHTML = `<p>Server Status: Offline</p>`;
+        }
+
+        // Display server icon
+        const serverIconElement = document.getElementById('server-icon');
+        serverIconElement.src = data.icon;
+      })
+      .catch(error => {
+        console.error('Error fetching server status:', error);
+      });
+  </script>
 </html>
